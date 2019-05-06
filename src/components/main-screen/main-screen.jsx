@@ -18,7 +18,7 @@ const MainScreen = (props) => {
    */
   const getPlacesTemplate = (placesData) => {
     return placesData.map((place, index) => {
-      const {title, img, type, price, rating, isPremium} = place;
+      const {img, isPremium, price, rating, title, type} = place;
 
       return <article className="cities__place-card place-card" key={index}>
         {isPremium && <div className="place-card__mark">
@@ -175,12 +175,12 @@ const MainScreen = (props) => {
 
 MainScreen.propTypes = {
   places: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
   })).isRequired
 };
 

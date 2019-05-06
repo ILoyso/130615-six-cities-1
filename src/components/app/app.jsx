@@ -20,12 +20,12 @@ const App = (props) => {
 
 App.propTypes = {
   places: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
   })).isRequired
 };
 
