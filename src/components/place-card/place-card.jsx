@@ -14,7 +14,8 @@ const PlaceCard = (props) => {
     price,
     rating,
     title,
-    type
+    type,
+    onTitleClick = () => {}
   } = props;
 
   return <article className="cities__place-card place-card">
@@ -46,7 +47,7 @@ const PlaceCard = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#">{title}</a>
+        <a href="#" onClick={onTitleClick}>{title}</a>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>
@@ -57,6 +58,7 @@ const PlaceCard = (props) => {
 PlaceCard.propTypes = {
   img: PropTypes.string.isRequired,
   isPremium: PropTypes.bool.isRequired,
+  onTitleClick: PropTypes.func,
   price: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
