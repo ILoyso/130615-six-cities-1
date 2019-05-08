@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import App from './app.jsx';
 
-const placesMock = [
+const placeMock = [
   {
     img: `apartment-01.jpg`,
     isPremium: true,
@@ -17,7 +17,7 @@ const placesMock = [
 it(`App correctly renders`, () => {
   const tree = renderer
     .create(<App
-      places={placesMock}
+      places={placeMock}
     />)
     .toJSON();
 
