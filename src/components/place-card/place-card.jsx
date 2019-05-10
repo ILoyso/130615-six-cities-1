@@ -11,11 +11,11 @@ const PlaceCard = (props) => {
   const {
     img,
     isPremium,
+    onTitleClick,
     price,
     rating,
     title,
-    type,
-    onTitleClick = () => {}
+    type
   } = props;
 
   return <article className="cities__place-card place-card">
@@ -58,7 +58,7 @@ const PlaceCard = (props) => {
 PlaceCard.propTypes = {
   img: PropTypes.string.isRequired,
   isPremium: PropTypes.bool.isRequired,
-  onTitleClick: PropTypes.func,
+  onTitleClick: PropTypes.func.isRequired,
   price: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,

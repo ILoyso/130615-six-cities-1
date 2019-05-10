@@ -118,6 +118,7 @@ const MainScreen = (props) => {
                 img={place.img}
                 isPremium={place.isPremium}
                 key={index}
+                onTitleClick={() => {}}
                 price={place.price}
                 rating={place.rating}
                 title={place.title}
