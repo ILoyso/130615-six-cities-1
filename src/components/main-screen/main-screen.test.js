@@ -15,11 +15,11 @@ const placeMock = [
 ];
 
 it(`App correctly renders`, () => {
-  const tree = renderer
+  const mainScreen = renderer
     .create(<MainScreen
       places={placeMock}
     />)
     .toJSON();
 
-  expect(tree).toMatchSnapshot();
+  expect(mainScreen).toMatchSnapshot();
 });

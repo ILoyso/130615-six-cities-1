@@ -115,14 +115,9 @@ const MainScreen = (props) => {
             </form>
             <div className="cities__places-list places__list tabs__content">
               {places.map((place, index) => <PlaceCard
-                img={place.img}
-                isPremium={place.isPremium}
+                info={place}
                 key={index}
                 onTitleClick={() => {}}
-                price={place.price}
-                rating={place.rating}
-                title={place.title}
-                type={place.type}
               />)}
             </div>
           </section>

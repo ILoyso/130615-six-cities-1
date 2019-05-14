@@ -8,15 +8,16 @@ import PropTypes from 'prop-types';
  * @return {*}
  */
 const PlaceCard = (props) => {
+  const {info, onTitleClick} = props;
+
   const {
     img,
     isPremium,
-    onTitleClick,
     price,
     rating,
     title,
     type
-  } = props;
+  } = info;
 
   return <article className="cities__place-card place-card">
     {isPremium && <div className="place-card__mark">
@@ -56,13 +57,15 @@ const PlaceCard = (props) => {
 
 
 PlaceCard.propTypes = {
-  img: PropTypes.string.isRequired,
-  isPremium: PropTypes.bool.isRequired,
+  info: PropTypes.shape({
+    img: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
   onTitleClick: PropTypes.func.isRequired,
-  price: PropTypes.number.isRequired,
-  rating: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
 };
 
 
