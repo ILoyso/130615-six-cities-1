@@ -21,16 +21,74 @@ const placeMock = {
   onTitleClick: jest.fn()
 };
 
-it(`Click on place card title correctly works`, () => {
-  const welcomeScreen = shallow(<PlaceCard
-    info={placeMock.info}
-    onCardHover={placeMock.onCardHover}
-    onCardImageClick={placeMock.onCardImageClick}
-    onTitleClick={placeMock.onTitleClick}
-  />);
 
-  const startButton = welcomeScreen.find(`.place-card__name a`);
-  startButton.simulate(`click`);
+describe(`PlaceCard Component`, () => {
+  it(`Click on place card title correctly works`, () => {
+    const {
+      info,
+      onCardHover,
+      onCardImageClick,
+      onTitleClick
+    } = placeMock;
 
-  expect(placeMock.onTitleClick).toHaveBeenCalledTimes(1);
+    const placeCard = shallow(<PlaceCard
+      info={info}
+      onCardHover={onCardHover}
+      onCardImageClick={onCardImageClick}
+      onTitleClick={onTitleClick}
+    />);
+
+    const startButton = placeCard.find(`.place-card__name a`);
+    startButton.simulate(`click`);
+
+    expect(placeMock.onTitleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it(`Click on place card image returns active card`, () => {
+    const {
+      info,
+      onCardHover,
+      onCardImageClick,
+      onTitleClick
+    } = placeMock;
+
+    onCardImageClick.mockReturnValue(info);
+
+    const placeCard = shallow(<PlaceCard
+      info={info}
+      onCardHover={onCardHover}
+      onCardImageClick={onCardImageClick}
+      onTitleClick={onTitleClick}
+    />);
+
+    const cardImage = placeCard.find(`.place-card__image-wrapper a`);
+    cardImage.simulate(`click`);
+
+    expect(placeMock.onCardImageClick).toHaveBeenCalledTimes(1);
+    expect(placeMock.onCardImageClick.mock.results[0].value).toEqual(info);
+  });
+
+  it(`Hover on place card returns active card`, () => {
+    const {
+      info,
+      onCardHover,
+      onCardImageClick,
+      onTitleClick
+    } = placeMock;
+
+    onCardHover.mockReturnValue(info);
+
+    const placeCard = shallow(<PlaceCard
+      info={info}
+      onCardHover={onCardHover}
+      onCardImageClick={onCardImageClick}
+      onTitleClick={onTitleClick}
+    />);
+
+    const card = placeCard.find(`.place-card`);
+    card.simulate(`mouseenter`);
+
+    expect(placeMock.onCardHover).toHaveBeenCalledTimes(1);
+    expect(placeMock.onCardHover.mock.results[0].value).toEqual(info);
+  });
 });
