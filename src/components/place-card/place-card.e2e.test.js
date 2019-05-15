@@ -16,12 +16,16 @@ const placeMock = {
     title: `Beautiful & luxurious apartment at great location`,
     type: `apartment`
   },
+  onCardHover: jest.fn(),
+  onCardImageClick: jest.fn(),
   onTitleClick: jest.fn()
 };
 
 it(`Click on place card title correctly works`, () => {
   const welcomeScreen = shallow(<PlaceCard
     info={placeMock.info}
+    onCardHover={placeMock.onCardHover}
+    onCardImageClick={placeMock.onCardImageClick}
     onTitleClick={placeMock.onTitleClick}
   />);
 

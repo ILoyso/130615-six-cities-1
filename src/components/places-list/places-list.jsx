@@ -4,22 +4,47 @@ import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
 
 
-/**
- * Component for rendering list of places
- * @param {Object} props
- * @return {*}
- */
-const PlacesList = (props) => {
-  const {places} = props;
+// Component for rendering list of places
+class PlacesList extends React.PureComponent {
 
-  return <div className="cities__places-list places__list tabs__content">
-    {places.map((place, index) => <PlaceCard
-      info={place}
-      key={index}
-      onTitleClick={() => {}}
-    />)}
-  </div>;
-};
+  /**
+   * Create PlacesList component
+   * @param {Object} props
+   */
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeCard: null,
+    };
+  }
+
+  /**
+   * Method for render place list
+   * @return {*}
+   */
+  render() {
+    const {places} = this.props;
+
+    const onCardHover = (card) => {
+      this.setState({
+        activeCard: card
+      });
+
+      return card;
+    };
+
+    return <div className="cities__places-list places__list tabs__content">
+      {places.map((place, index) => <PlaceCard
+        info={place}
+        key={index}
+        onCardHover={onCardHover}
+        onCardImageClick={onCardHover}
+        onTitleClick={() => {}}
+      />)}
+    </div>;
+  }
+}
 
 
 PlacesList.propTypes = {
