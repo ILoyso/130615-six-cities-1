@@ -17,6 +17,8 @@ class PlacesList extends React.PureComponent {
     this.state = {
       activeCard: null,
     };
+
+    this._handlerCardAction = this._handlerCardAction.bind(this);
   }
 
   /**
@@ -26,23 +28,23 @@ class PlacesList extends React.PureComponent {
   render() {
     const {places} = this.props;
 
-    const onCardHover = (card) => {
-      this.setState({
-        activeCard: card
-      });
-
-      return card;
-    };
-
     return <div className="cities__places-list places__list tabs__content">
       {places.map((place, index) => <PlaceCard
         info={place}
         key={index}
-        onCardHover={onCardHover}
-        onCardImageClick={onCardHover}
+        onCardHover={this._handlerCardAction}
+        onCardImageClick={this._handlerCardAction}
         onTitleClick={() => {}}
       />)}
     </div>;
+  }
+
+  _handlerCardAction(card) {
+    this.setState({
+      activeCard: card
+    });
+
+    return card;
   }
 }
 
