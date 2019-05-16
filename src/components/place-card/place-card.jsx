@@ -9,21 +9,31 @@ import PropTypes from 'prop-types';
  */
 const PlaceCard = (props) => {
   const {
+    info,
+    onCardHover,
+    onCardImageClick,
+    onTitleClick
+  } = props;
+
+  const {
     img,
     isPremium,
-    onTitleClick,
     price,
     rating,
     title,
     type
-  } = props;
+  } = info;
 
-  return <article className="cities__place-card place-card">
+  return <article className="cities__place-card place-card" onMouseEnter={() => {
+    onCardHover(info);
+  }}>
     {isPremium && <div className="place-card__mark">
       <span>Premium</span>
     </div>}
     <div className="cities__image-wrapper place-card__image-wrapper">
-      <a href="#">
+      <a href="#" onClick={() => {
+        onCardImageClick(info);
+      }}>
         <img className="place-card__image" src={`img/${img}`} width="260" height="200" alt="Place image" />
       </a>
     </div>
@@ -47,7 +57,9 @@ const PlaceCard = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#" onClick={onTitleClick}>{title}</a>
+        <a href="#" onClick={() => {
+          onTitleClick();
+        }}>{title}</a>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>
@@ -56,13 +68,17 @@ const PlaceCard = (props) => {
 
 
 PlaceCard.propTypes = {
-  img: PropTypes.string.isRequired,
-  isPremium: PropTypes.bool.isRequired,
+  info: PropTypes.shape({
+    img: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
+  onCardHover: PropTypes.func.isRequired,
+  onCardImageClick: PropTypes.func.isRequired,
   onTitleClick: PropTypes.func.isRequired,
-  price: PropTypes.number.isRequired,
-  rating: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
 };
 
 

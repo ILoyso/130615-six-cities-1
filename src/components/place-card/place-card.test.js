@@ -5,27 +5,28 @@ import PlaceCard from './place-card.jsx';
 
 
 const placeMock = {
-  img: `apartment-01.jpg`,
-  isPremium: true,
-  onTitleClick: jest.fn(),
-  price: 120,
-  rating: 93,
-  title: `Beautiful & luxurious apartment at great location`,
-  type: `apartment`
+  info: {
+    img: `apartment-01.jpg`,
+    isPremium: true,
+    price: 120,
+    rating: 93,
+    title: `Beautiful & luxurious apartment at great location`,
+    type: `apartment`
+  },
+  onCardHover: jest.fn(),
+  onCardImageClick: jest.fn(),
+  onTitleClick: jest.fn()
 };
 
 it(`Place card correctly renders`, () => {
-  const tree = renderer
+  const placeCard = renderer
     .create(<PlaceCard
-      img={placeMock.img}
-      isPremium={placeMock.isPremium}
+      info={placeMock.info}
+      onCardHover={placeMock.onCardHover}
+      onCardImageClick={placeMock.onCardImageClick}
       onTitleClick={placeMock.onTitleClick}
-      price={placeMock.price}
-      rating={placeMock.rating}
-      title={placeMock.title}
-      type={placeMock.type}
     />)
     .toJSON();
 
-  expect(tree).toMatchSnapshot();
+  expect(placeCard).toMatchSnapshot();
 });

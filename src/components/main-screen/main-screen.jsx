@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PlaceCard from '../place-card/place-card.jsx';
+import PlacesList from '../places-list/places-list.jsx';
 
 
 /**
@@ -113,18 +113,9 @@ const MainScreen = (props) => {
                 <option class="places__option" value="top-rated">Top rated first</option>
               </select> */}
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {places.map((place, index) => <PlaceCard
-                img={place.img}
-                isPremium={place.isPremium}
-                key={index}
-                onTitleClick={() => {}}
-                price={place.price}
-                rating={place.rating}
-                title={place.title}
-                type={place.type}
-              />)}
-            </div>
+            {<PlacesList
+              places={places}
+            />}
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>

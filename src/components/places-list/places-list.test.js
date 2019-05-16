@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import MainScreen from './main-screen.jsx';
+import PlacesList from './places-list.jsx';
 
 const placeMock = [
   {
@@ -14,12 +14,12 @@ const placeMock = [
   }
 ];
 
-it(`App correctly renders`, () => {
-  const mainScreen = renderer
-    .create(<MainScreen
+it(`PlacesList correctly renders`, () => {
+  const placesList = renderer
+    .create(<PlacesList
       places={placeMock}
     />)
     .toJSON();
 
-  expect(mainScreen).toMatchSnapshot();
+  expect(placesList).toMatchSnapshot();
 });

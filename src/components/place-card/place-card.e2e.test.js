@@ -8,28 +8,87 @@ import PlaceCard from './place-card.jsx';
 Enzyme.configure({adapter: new Adapter()});
 
 const placeMock = {
-  img: `apartment-01.jpg`,
-  isPremium: true,
-  onTitleClick: jest.fn(),
-  price: 120,
-  rating: 93,
-  title: `Beautiful & luxurious apartment at great location`,
-  type: `apartment`
+  info: {
+    img: `apartment-01.jpg`,
+    isPremium: true,
+    price: 120,
+    rating: 93,
+    title: `Beautiful & luxurious apartment at great location`,
+    type: `apartment`
+  },
+  onCardHover: jest.fn(),
+  onCardImageClick: jest.fn(),
+  onTitleClick: jest.fn()
 };
 
-it(`Click on place card title correctly works`, () => {
-  const welcomeScreen = shallow(<PlaceCard
-    img={placeMock.img}
-    isPremium={placeMock.isPremium}
-    onTitleClick={placeMock.onTitleClick}
-    price={placeMock.price}
-    rating={placeMock.rating}
-    title={placeMock.title}
-    type={placeMock.type}
-  />);
 
-  const startButton = welcomeScreen.find(`.place-card__name a`);
-  startButton.simulate(`click`);
+describe(`PlaceCard Component`, () => {
+  it(`Click on place card title correctly works`, () => {
+    const {
+      info,
+      onCardHover,
+      onCardImageClick,
+      onTitleClick
+    } = placeMock;
 
-  expect(placeMock.onTitleClick).toHaveBeenCalledTimes(1);
+    const placeCard = shallow(<PlaceCard
+      info={info}
+      onCardHover={onCardHover}
+      onCardImageClick={onCardImageClick}
+      onTitleClick={onTitleClick}
+    />);
+
+    const startButton = placeCard.find(`.place-card__name a`);
+    startButton.simulate(`click`);
+
+    expect(placeMock.onTitleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it(`Click on place card image returns active card`, () => {
+    const {
+      info,
+      onCardHover,
+      onCardImageClick,
+      onTitleClick
+    } = placeMock;
+
+    onCardImageClick.mockReturnValue(info);
+
+    const placeCard = shallow(<PlaceCard
+      info={info}
+      onCardHover={onCardHover}
+      onCardImageClick={onCardImageClick}
+      onTitleClick={onTitleClick}
+    />);
+
+    const cardImage = placeCard.find(`.place-card__image-wrapper a`);
+    cardImage.simulate(`click`);
+
+    expect(placeMock.onCardImageClick).toHaveBeenCalledTimes(1);
+    expect(placeMock.onCardImageClick.mock.results[0].value).toEqual(info);
+  });
+
+  it(`Hover on place card returns active card`, () => {
+    const {
+      info,
+      onCardHover,
+      onCardImageClick,
+      onTitleClick
+    } = placeMock;
+
+    onCardHover.mockReturnValue(info);
+
+    const placeCard = shallow(<PlaceCard
+      info={info}
+      onCardHover={onCardHover}
+      onCardImageClick={onCardImageClick}
+      onTitleClick={onTitleClick}
+    />);
+
+    const card = placeCard.find(`.place-card`);
+    card.simulate(`mouseenter`);
+
+    expect(placeMock.onCardHover).toHaveBeenCalledTimes(1);
+    expect(placeMock.onCardHover.mock.results[0].value).toEqual(info);
+  });
 });
