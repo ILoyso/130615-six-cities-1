@@ -5,6 +5,7 @@ import App from './app.jsx';
 
 const placeMock = [
   {
+    coordinates: [52.3909553943508, 4.85309666406198],
     img: `apartment-01.jpg`,
     isPremium: true,
     price: 120,
@@ -15,11 +16,11 @@ const placeMock = [
 ];
 
 it(`App correctly renders`, () => {
-  const tree = renderer
+  const app = renderer
     .create(<App
       places={placeMock}
     />)
     .toJSON();
 
-  expect(tree).toMatchSnapshot();
+  expect(app).toMatchSnapshot();
 });

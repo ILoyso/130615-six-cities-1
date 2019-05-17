@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import PlacesList from '../places-list/places-list.jsx';
+import PlacesMap from '../places-map/places-map.jsx';
 
 
 /**
@@ -113,12 +114,14 @@ const MainScreen = (props) => {
                 <option class="places__option" value="top-rated">Top rated first</option>
               </select> */}
             </form>
-            {<PlacesList
+            <PlacesList
               places={places}
-            />}
+            />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <PlacesMap
+              places={places}
+            />
           </div>
         </div>
       </div>
@@ -129,6 +132,7 @@ const MainScreen = (props) => {
 
 MainScreen.propTypes = {
   places: PropTypes.arrayOf(PropTypes.shape({
+    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
     img: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
