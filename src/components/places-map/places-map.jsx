@@ -2,6 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
+const SETTINGS = {
+  center: [52.38333, 4.9],
+  icon: leaflet.icon({
+    iconUrl: `img/pin.svg`,
+    iconSize: [30, 30]
+  }),
+  marker: true,
+  zoom: 12,
+  zoomControl: false
+};
+
+const LEAFLET_PARAMS = {
+  copy: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
+  picture: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
+};
+
 
 // PlacesMap component
 class PlacesMap extends React.PureComponent {
@@ -43,34 +59,34 @@ class PlacesMap extends React.PureComponent {
 
   /**
    * Initialization of map and set app params
+   * @throws {Error} when leaflet (map) not loaded
    * @private
    */
   _createMap() {
     const {places} = this.props;
 
-    const city = [52.38333, 4.9];
-
-    const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
-    });
-
-    const zoom = 12;
+    const {
+      center,
+      icon,
+      marker,
+      zoom,
+      zoomControl,
+    } = SETTINGS;
 
     const map = leaflet.map(this._mapRef.current, {
-      center: city,
+      center,
       layers: [
         leaflet
-          .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-            attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+          .tileLayer(LEAFLET_PARAMS.picture, {
+            attribution: LEAFLET_PARAMS.copy
           }),
       ],
-      marker: true,
+      marker,
       zoom,
-      zoomControl: false
+      zoomControl,
     });
 
-    map.setView(city, zoom);
+    map.setView(center, zoom);
 
     places.forEach((place) => {
       const coordinates = place.coordinates;
