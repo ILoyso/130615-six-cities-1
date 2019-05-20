@@ -60,18 +60,18 @@ class PlacesMap extends React.PureComponent {
 
     const map = leaflet.map(this._mapRef.current, {
       center: city,
+      layers: [
+        leaflet
+          .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+            attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+          }),
+      ],
       marker: true,
       zoom,
       zoomControl: false
     });
 
     map.setView(city, zoom);
-
-    leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      })
-      .addTo(map);
 
     places.forEach((place) => {
       const coordinates = place.coordinates;
