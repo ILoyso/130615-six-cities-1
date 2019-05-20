@@ -23,7 +23,6 @@ class PlacesMap extends React.PureComponent {
   render() {
     return <section className="cities__map map">
       <div
-        id="map"
         ref={this._mapRef}
         style={{height: `100%`}}
       ></div>

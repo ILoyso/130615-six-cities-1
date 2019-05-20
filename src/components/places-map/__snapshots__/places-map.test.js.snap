@@ -5,7 +5,6 @@ exports[`PlacesMap renders correctly 1`] = `
   className="cities__map map"
 >
   <div
-    id="map"
     style={
       Object {
         "height": "100%",

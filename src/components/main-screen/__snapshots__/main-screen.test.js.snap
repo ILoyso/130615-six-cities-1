@@ -375,7 +375,6 @@ Array [
             className="cities__map map"
           >
             <div
-              id="map"
               style={
                 Object {
                   "height": "100%",
