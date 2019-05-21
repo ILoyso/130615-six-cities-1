@@ -20,6 +20,7 @@ const App = (props) => {
 
 App.propTypes = {
   places: PropTypes.arrayOf(PropTypes.shape({
+    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
     img: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,

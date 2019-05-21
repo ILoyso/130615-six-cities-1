@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import PlacesMap from './places-map.jsx';
 
-import MainScreen from './main-screen.jsx';
 
 const placeMock = [
   {
@@ -15,12 +15,13 @@ const placeMock = [
   }
 ];
 
-it(`App correctly renders`, () => {
-  const mainScreen = renderer
-    .create(<MainScreen
+
+it(`PlacesMap renders correctly`, () => {
+  const map = renderer
+    .create(<PlacesMap
       places={placeMock}
     />)
     .toJSON();
 
-  expect(mainScreen).toMatchSnapshot();
+  expect(map).toMatchSnapshot();
 });
