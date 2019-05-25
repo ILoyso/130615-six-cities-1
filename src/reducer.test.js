@@ -1,4 +1,5 @@
 import {
+  ActionCreator,
   reducer
 } from './reducer';
 import {PLACES_DATA} from './mock/places';
@@ -55,6 +56,42 @@ describe(`Reducer works correctly`, () => {
     })).toEqual({
       city: `Amsterdam`,
       places: [
+        {
+          coordinates: [10, 10],
+          img: `src`,
+          isPremium: false,
+          price: 50,
+          rating: 5,
+          title: `Title`,
+          type: `apartment`
+        }
+      ]
+    });
+  });
+});
+
+describe(`Action creators work correctly`, () => {
+  it(`Action creator for change city correctly change it`, () => {
+    expect(ActionCreator.changeCity(`Amsterdam`)).toEqual({
+      type: `CHANGE_CITY`,
+      payload: `Amsterdam`
+    });
+  });
+
+  it(`Action creator for change places correctly change it`, () => {
+    expect(ActionCreator.changePlaces([
+      {
+        coordinates: [10, 10],
+        img: `src`,
+        isPremium: false,
+        price: 50,
+        rating: 5,
+        title: `Title`,
+        type: `apartment`
+      }
+    ])).toEqual({
+      type: `CHANGE_PLACES`,
+      payload: [
         {
           coordinates: [10, 10],
           img: `src`,

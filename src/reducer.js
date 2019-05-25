@@ -14,6 +14,23 @@ const ActionType = {
 
 
 /**
+ * Methods that returns actions for reducer (Object with type and payload params)
+ * @return {Object}
+ */
+const ActionCreator = {
+  changeCity: (city) => ({
+    type: ActionType.CHANGE_CITY,
+    payload: city
+  }),
+
+  changePlaces: (places) => ({
+    type: ActionType.CHANGE_PLACES,
+    payload: places
+  })
+};
+
+
+/**
  * Reducer for change application state
  * @param {Object} state [state = initialState]
  * @param {Object} action
@@ -38,4 +55,7 @@ const reducer = (state = initialState, action) => {
 };
 
 
-export {reducer};
+export {
+  ActionCreator,
+  reducer
+};
