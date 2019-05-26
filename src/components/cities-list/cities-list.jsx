@@ -19,7 +19,7 @@ const CitiesList = (props) => {
       <ul className="locations__list tabs__list">
         {cities.map((cityName, index) => <li className="locations__item" key={index}>
           <a
-            className={`locations__item-link tabs__item ${city === cityName && `tabs__item--active`}`}
+            className={`locations__item-link tabs__item ${city === cityName ? `tabs__item--active` : ``}`}
             href="#"
             onClick={(event) => {
               event.preventDefault();
