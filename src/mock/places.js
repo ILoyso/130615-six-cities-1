@@ -90,6 +90,26 @@ export const PLACES_DATA = [
     type: `apartment`
   },
   {
+    city: `Cologne`,
+    coordinates: [50.959209, 6.955255],
+    img: `apartment-03.jpg`,
+    isPremium: true,
+    price: 180,
+    rating: 100,
+    title: `Nice, cozy, warm big bed apartment`,
+    type: `apartment`
+  },
+  {
+    city: `Cologne`,
+    coordinates: [50.933364, 6.999804],
+    img: `apartment-03.jpg`,
+    isPremium: true,
+    price: 180,
+    rating: 100,
+    title: `Nice, cozy, warm big bed apartment`,
+    type: `apartment`
+  },
+  {
     city: `Dusseldorf`,
     coordinates: [51.260121, 6.802140],
     img: `apartment-03.jpg`,
