@@ -6,8 +6,6 @@ import {Provider} from 'react-redux';
 import {reducer} from './reducer';
 import App from './components/app/app.jsx';
 
-import {PLACES_DATA} from "./mock/places";
-
 
 // Entry point for project
 const init = () => {
@@ -15,9 +13,7 @@ const init = () => {
 
   // React render for App component
   ReactDOM.render(<Provider store={store}>
-    <App
-      places={PLACES_DATA}
-    />
+    <App />
   </Provider>,
   document.querySelector(`#root`)
   );

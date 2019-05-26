@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
+import {CITIES_DATA} from '../../cities';
+
 const SETTINGS = {
-  center: [52.38333, 4.9],
   icon: leaflet.icon({
     iconUrl: `img/pin.svg`,
     iconSize: [30, 30]
@@ -50,31 +51,68 @@ class PlacesMap extends React.PureComponent {
    * Here map is created
    */
   componentDidMount() {
+    const {
+      city,
+      places
+    } = this.props;
+
     try {
-      this._createMap();
+      this._createMap(city);
+      this._addPinsToMap(places);
     } catch (error) {
       throw error;
     }
   }
 
   /**
+   * Method is invoked when component is updated
+   * Here map is updated
+   */
+  componentDidUpdate() {
+    const {
+      city,
+      places
+    } = this.props;
+    const cityCenter = CITIES_DATA[city];
+    const {zoom} = SETTINGS;
+
+    this.map.setView(cityCenter, zoom);
+    this._addPinsToMap(places);
+  }
+
+  /**
+   * App places pins to map
+   * @param {Object} places
+   * @private
+   */
+  _addPinsToMap(places) {
+    const {icon} = SETTINGS;
+
+    places.forEach((place) => {
+      const coordinates = place.coordinates;
+      return leaflet
+        .marker(coordinates, {icon})
+        .addTo(this.map);
+    });
+  }
+
+  /**
    * Initialization of map and set app params
+   * @param {String} city
    * @throws {Error} when leaflet (map) not loaded
    * @private
    */
-  _createMap() {
-    const {places} = this.props;
+  _createMap(city) {
+    const cityCenter = CITIES_DATA[city];
 
     const {
-      center,
-      icon,
       marker,
       zoom,
       zoomControl,
     } = SETTINGS;
 
-    const map = leaflet.map(this._mapRef.current, {
-      center,
+    this.map = leaflet.map(this._mapRef.current, {
+      cityCenter,
       layers: [
         leaflet
           .tileLayer(LEAFLET_PARAMS.picture, {
@@ -86,19 +124,13 @@ class PlacesMap extends React.PureComponent {
       zoomControl,
     });
 
-    map.setView(center, zoom);
-
-    places.forEach((place) => {
-      const coordinates = place.coordinates;
-      return leaflet
-        .marker(coordinates, {icon})
-        .addTo(map);
-    });
+    this.map.setView(cityCenter, zoom);
   }
 }
 
 
 PlacesMap.propTypes = {
+  city: PropTypes.string.isRequired,
   places: PropTypes.arrayOf(PropTypes.shape({
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
     img: PropTypes.string.isRequired,
