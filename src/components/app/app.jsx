@@ -34,7 +34,7 @@ const App = (props) => {
  * @param {Object} ownProps
  * @return {Object}
  */
-const _mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
   cities: Array.from(new Set(state.places.map((place) => place.city))).slice(0, 6),
   places: state.places.filter((place) => place.city === state.city)
@@ -46,7 +46,7 @@ const _mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
  * @param {Function} dispatch
  * @return {Function}
  */
-const _mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   changeCity: (city) => {
     dispatch(ActionCreator.changeCity(city));
   }
@@ -72,4 +72,4 @@ App.propTypes = {
 
 export {App};
 
-export default connect(_mapStateToProps, _mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
