@@ -9,7 +9,12 @@ import App from './components/app/app.jsx';
 
 // Entry point for project
 const init = () => {
-  const store = createStore(reducer);
+  /* eslint-disable no-underscore-dangle */
+  const store = createStore(
+      reducer,
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+  /* eslint-enable */
 
   // React render for App component
   ReactDOM.render(<Provider store={store}>
