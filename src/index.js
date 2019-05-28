@@ -1,19 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app/app.jsx';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 
-import {PLACES_DATA} from "./mock/places";
+import {reducer} from './reducer';
+import App from './components/app/app.jsx';
 
 
 // Entry point for project
 const init = () => {
+  const store = createStore(reducer);
 
   // React render for App component
-  ReactDOM.render(
-      <App
-        places={PLACES_DATA}
-      />,
-      document.querySelector(`#root`)
+  ReactDOM.render(<Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector(`#root`)
   );
 };
 

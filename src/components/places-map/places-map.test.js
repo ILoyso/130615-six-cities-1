@@ -19,6 +19,7 @@ const placeMock = [
 it(`PlacesMap renders correctly`, () => {
   const map = renderer
     .create(<PlacesMap
+      city={`Amsterdam`}
       places={placeMock}
     />)
     .toJSON();

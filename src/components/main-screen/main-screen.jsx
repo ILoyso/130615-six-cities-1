@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import PlacesList from '../places-list/places-list.jsx';
 import PlacesMap from '../places-map/places-map.jsx';
+import CitiesList from '../cities-list/cities-list.jsx';
 
 
 /**
@@ -11,7 +12,12 @@ import PlacesMap from '../places-map/places-map.jsx';
  * @return {*}
  */
 const MainScreen = (props) => {
-  const {places} = props;
+  const {
+    changeCity,
+    cities,
+    city,
+    places
+  } = props;
 
   return <>
     <div style={{display: `none`}}>
@@ -52,47 +58,16 @@ const MainScreen = (props) => {
 
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
-      <div className="cities tabs">
-        <section className="locations container">
-          <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active">
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Dusseldorf</span>
-              </a>
-            </li>
-          </ul>
-        </section>
-      </div>
+      <CitiesList
+        changeCity={changeCity}
+        cities={cities}
+        city={city}
+      />
       <div className="cities__places-wrapper">
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">312 places to stay in Amsterdam</b>
+            <b className="places__found">{places.length} {places.length > 1 ? `places` : `place`} to stay in {city}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -120,6 +95,7 @@ const MainScreen = (props) => {
           </section>
           <div className="cities__right-section">
             <PlacesMap
+              city={city}
               places={places}
             />
           </div>
@@ -131,6 +107,9 @@ const MainScreen = (props) => {
 
 
 MainScreen.propTypes = {
+  changeCity: PropTypes.func.isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  city: PropTypes.string.isRequired,
   places: PropTypes.arrayOf(PropTypes.shape({
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
     img: PropTypes.string.isRequired,
