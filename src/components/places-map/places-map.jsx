@@ -30,7 +30,7 @@ class PlacesMap extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.map = null;
+    this._map = null;
     this._mapRef = React.createRef();
   }
 
@@ -77,7 +77,7 @@ class PlacesMap extends React.PureComponent {
     const cityCenter = CITIES_DATA[city];
     const {zoom} = SETTINGS;
 
-    this.map.setView(cityCenter, zoom);
+    this._map.setView(cityCenter, zoom);
     this._addPinsToMap(places);
   }
 
@@ -93,7 +93,7 @@ class PlacesMap extends React.PureComponent {
       const coordinates = place.coordinates;
       return leaflet
         .marker(coordinates, {icon})
-        .addTo(this.map);
+        .addTo(this._map);
     });
   }
 
@@ -112,7 +112,7 @@ class PlacesMap extends React.PureComponent {
       zoomControl,
     } = SETTINGS;
 
-    this.map = leaflet.map(this._mapRef.current, {
+    this._map = leaflet.map(this._mapRef.current, {
       cityCenter,
       layers: [
         leaflet
@@ -125,7 +125,7 @@ class PlacesMap extends React.PureComponent {
       zoomControl,
     });
 
-    this.map.setView(cityCenter, zoom);
+    this._map.setView(cityCenter, zoom);
   }
 }
 
