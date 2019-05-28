@@ -44,7 +44,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 /**
  * Function for connect action creator methods with app
  * @param {Function} dispatch
- * @return {Function}
+ * @return {Object}
  */
 const mapDispatchToProps = (dispatch) => ({
   changeCity: (city) => {
