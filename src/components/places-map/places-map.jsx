@@ -30,6 +30,7 @@ class PlacesMap extends React.PureComponent {
   constructor(props) {
     super(props);
 
+    this.map = null;
     this._mapRef = React.createRef();
   }
 
