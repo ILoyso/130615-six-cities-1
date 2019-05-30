@@ -18,6 +18,7 @@ it(`PlacesList correctly renders`, () => {
   const placesList = renderer
     .create(<PlacesList
       places={placeMock}
+      setActiveItem={jest.fn()}
     />)
     .toJSON();
 

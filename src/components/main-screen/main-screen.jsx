@@ -5,6 +5,11 @@ import PlacesList from '../places-list/places-list.jsx';
 import PlacesMap from '../places-map/places-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 
+import withActiveItem from '../../hocs/with-active-item';
+
+
+const PlacesListWrapped = withActiveItem(PlacesList);
+
 
 /**
  * Component for main screen of application
@@ -89,7 +94,7 @@ const MainScreen = (props) => {
                 <option class="places__option" value="top-rated">Top rated first</option>
               </select> */}
             </form>
-            <PlacesList
+            <PlacesListWrapped
               places={places}
             />
           </section>

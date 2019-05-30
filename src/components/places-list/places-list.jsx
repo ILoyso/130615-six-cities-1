@@ -8,43 +8,24 @@ import PlaceCard from '../place-card/place-card.jsx';
 class PlacesList extends React.PureComponent {
 
   /**
-   * Create PlacesList component
-   * @param {Object} props
-   */
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCard: null,
-    };
-
-    this._handlerCardAction = this._handlerCardAction.bind(this);
-  }
-
-  /**
    * Method for render place list
    * @return {*}
    */
   render() {
-    const {places} = this.props;
+    const {
+      places,
+      setActiveItem
+    } = this.props;
 
     return <div className="cities__places-list places__list tabs__content">
       {places.map((place, index) => <PlaceCard
         info={place}
         key={index}
-        onCardHover={this._handlerCardAction}
-        onCardImageClick={this._handlerCardAction}
+        onCardHover={setActiveItem}
+        onCardImageClick={setActiveItem}
         onTitleClick={() => {}}
       />)}
     </div>;
-  }
-
-  _handlerCardAction(card) {
-    this.setState({
-      activeCard: card
-    });
-
-    return card;
   }
 }
 
@@ -57,7 +38,8 @@ PlacesList.propTypes = {
     rating: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-  })).isRequired
+  })).isRequired,
+  setActiveItem: PropTypes.func.isRequired
 };
 
 
