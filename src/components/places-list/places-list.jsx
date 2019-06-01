@@ -5,29 +5,22 @@ import PlaceCard from '../place-card/place-card.jsx';
 
 
 // Component for rendering list of places
-class PlacesList extends React.PureComponent {
+const PlacesList = (props) => {
+  const {
+    places,
+    setActiveItem
+  } = props;
 
-  /**
-   * Method for render place list
-   * @return {*}
-   */
-  render() {
-    const {
-      places,
-      setActiveItem
-    } = this.props;
-
-    return <div className="cities__places-list places__list tabs__content">
-      {places.map((place, index) => <PlaceCard
-        info={place}
-        key={index}
-        onCardHover={setActiveItem}
-        onCardImageClick={setActiveItem}
-        onTitleClick={() => {}}
-      />)}
-    </div>;
-  }
-}
+  return <div className="cities__places-list places__list tabs__content">
+    {places.map((place, index) => <PlaceCard
+      info={place}
+      key={index}
+      onCardHover={setActiveItem}
+      onCardImageClick={setActiveItem}
+      onTitleClick={() => {}}
+    />)}
+  </div>;
+};
 
 
 PlacesList.propTypes = {
