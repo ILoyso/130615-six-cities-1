@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/cities/cities';
 import MainScreen from '../main-screen/main-screen.jsx';
 
+import {getCity, getCities, getCurrentPlaces} from '../../reducer/selectors';
+
 
 /**
  * Application component, here the whole process begins
@@ -35,9 +37,9 @@ const App = (props) => {
  * @return {Object}
  */
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  city: state.cities.city,
-  cities: Array.from(new Set(state.data.places.map((place) => place.city))).slice(0, 6),
-  places: state.data.places.filter((place) => place.city === state.cities.city),
+  city: getCity(state),
+  cities: getCities(state),
+  places: getCurrentPlaces(state),
 });
 
 
