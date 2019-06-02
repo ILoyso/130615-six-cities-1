@@ -34,7 +34,7 @@ const PlaceCard = (props) => {
       <a href="#" onClick={() => {
         onCardImageClick(info);
       }}>
-        <img className="place-card__image" src={`img/${img}`} width="260" height="200" alt="Place image" />
+        <img className="place-card__image" src={img} width="260" height="200" alt="Place image" />
       </a>
     </div>
     <div className="place-card__info">

@@ -1,15 +1,16 @@
-import {PLACES_DATA} from './mock/places';
+import PlacesParser from './places-parser/places-parser';
 
 
 const initialState = {
   city: `Amsterdam`,
-  places: PLACES_DATA
+  places: []
 };
 
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  CHANGE_PLACES: `CHANGE_PLACES`
+  CHANGE_PLACES: `CHANGE_PLACES`,
+  LOAD_PLACES: `LOAD_PLACES`,
 };
 
 
@@ -26,7 +27,24 @@ const ActionCreator = {
   changePlaces: (places) => ({
     type: ActionType.CHANGE_PLACES,
     payload: places
-  })
+  }),
+
+  loadPlaces: (places) => {
+    return {
+      type: ActionType.LOAD_PLACES,
+      payload: places,
+    };
+  }
+};
+
+
+const Operation = {
+  loadPlaces: () => (dispatch, _getState, api) => {
+    return api.get(`/hotels`)
+      .then((response) => {
+        dispatch(ActionCreator.loadPlaces(PlacesParser.parsePlaces(response.data)));
+      });
+  },
 };
 
 
@@ -34,7 +52,6 @@ const ActionCreator = {
  * Reducer for change application state
  * @param {Object} state [state = initialState]
  * @param {Object} action
- * @param {Number} action.payload
  * @param {String} action.type
  * @return {Object}
  */
@@ -49,6 +66,11 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         places: action.payload,
       });
+
+    case ActionType.LOAD_PLACES:
+      return Object.assign({}, state, {
+        places: action.payload,
+      });
   }
 
   return state;
@@ -57,5 +79,7 @@ const reducer = (state = initialState, action) => {
 
 export {
   ActionCreator,
+  ActionType,
+  Operation,
   reducer
 };
