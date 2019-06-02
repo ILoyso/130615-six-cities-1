@@ -1,32 +1,18 @@
 import MockAdapter from 'axios-mock-adapter';
 
-import PlacesParser from './places-parser/places-parser';
-import {createAPI} from './api';
+import PlacesParser from '../../places-parser/places-parser';
+import {createAPI} from '../../api';
 import {
   ActionCreator,
   ActionType,
   Operation,
   reducer
-} from './reducer';
+} from './data';
 
 
 describe(`Reducer works correctly`, () => {
   it(`returns initial state without parameters`, () => {
     expect(reducer(undefined, {})).toEqual({
-      city: `Amsterdam`,
-      places: []
-    });
-  });
-
-  it(`Reducer should change city by a given value`, () => {
-    expect(reducer({
-      city: `Amsterdam`,
-      places: []
-    }, {
-      type: ActionType.CHANGE_CITY,
-      payload: `New City`,
-    })).toEqual({
-      city: `New City`,
       places: []
     });
   });
@@ -76,13 +62,6 @@ describe(`Reducer works correctly`, () => {
 });
 
 describe(`Action creators work correctly`, () => {
-  it(`Action creator for change city correctly change it`, () => {
-    expect(ActionCreator.changeCity(`Amsterdam`)).toEqual({
-      type: ActionType.CHANGE_CITY,
-      payload: `Amsterdam`
-    });
-  });
-
   it(`Action creator for change places correctly change it`, () => {
     expect(ActionCreator.changePlaces([
       {

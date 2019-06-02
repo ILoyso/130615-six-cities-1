@@ -5,7 +5,8 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 
-import {reducer, Operation} from './reducer';
+import reducer from './reducer/reducer';
+import {Operation} from './reducer/data/data';
 import {createAPI} from './api';
 import App from './components/app/app.jsx';
 

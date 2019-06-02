@@ -1,14 +1,12 @@
-import PlacesParser from './places-parser/places-parser';
+import PlacesParser from '../../places-parser/places-parser';
 
 
 const initialState = {
-  city: `Amsterdam`,
   places: []
 };
 
 
 const ActionType = {
-  CHANGE_CITY: `CHANGE_CITY`,
   CHANGE_PLACES: `CHANGE_PLACES`,
   LOAD_PLACES: `LOAD_PLACES`,
 };
@@ -19,11 +17,6 @@ const ActionType = {
  * @return {Object}
  */
 const ActionCreator = {
-  changeCity: (city) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: city
-  }),
-
   changePlaces: (places) => ({
     type: ActionType.CHANGE_PLACES,
     payload: places
@@ -57,11 +50,6 @@ const Operation = {
  */
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_CITY:
-      return Object.assign({}, state, {
-        city: action.payload
-      });
-
     case ActionType.CHANGE_PLACES:
       return Object.assign({}, state, {
         places: action.payload,

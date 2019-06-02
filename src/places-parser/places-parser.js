@@ -1,4 +1,4 @@
-/** Class for help transforming data from server to our places model */
+/** Class for help transforming reducer from server to our places model */
 export default class PlacesParser {
 
   /**
