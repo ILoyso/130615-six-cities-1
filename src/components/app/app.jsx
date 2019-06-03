@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/cities/cities';
 import MainScreen from '../main-screen/main-screen.jsx';
+
+import {getCity, getCities, getCurrentPlaces} from '../../reducer/selectors';
 
 
 /**
@@ -35,9 +37,9 @@ const App = (props) => {
  * @return {Object}
  */
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  city: state.city,
-  cities: Array.from(new Set(state.places.map((place) => place.city))).slice(0, 6),
-  places: state.places.filter((place) => place.city === state.city)
+  city: getCity(state),
+  cities: getCities(state),
+  places: getCurrentPlaces(state),
 });
 
 
