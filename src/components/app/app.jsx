@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {ActionCreator} from '../../reducer/cities/cities';
+import Header from '../header/header.jsx';
 import MainScreen from '../main-screen/main-screen.jsx';
 
 import {getCity, getCities, getCurrentPlaces} from '../../reducer/selectors';
@@ -21,12 +22,15 @@ const App = (props) => {
     places
   } = props;
 
-  return <MainScreen
-    changeCity={changeCity}
-    cities={cities}
-    city={city}
-    places={places}
-  />;
+  return <>
+    <Header />
+    <MainScreen
+      changeCity={changeCity}
+      cities={cities}
+      city={city}
+      places={places}
+    />
+  </>;
 };
 
 
