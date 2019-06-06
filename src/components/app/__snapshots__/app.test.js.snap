@@ -83,9 +83,10 @@ Array [
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
                 <span
-                  className="header__user-name user__name"
+                  className="header__login"
+                  onClick={[Function]}
                 >
-                  Oliver.conner@gmail.com
+                  Sign in
                 </span>
               </a>
             </li>
