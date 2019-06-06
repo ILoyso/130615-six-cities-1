@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header correctly renders 1`] = `
+exports[`Header Component Header correctly renders 1`] = `
 Array [
   <div
     style={
@@ -83,9 +83,10 @@ Array [
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
                 <span
-                  className="header__user-name user__name"
+                  className="header__login"
+                  onClick={[MockFunction]}
                 >
-                  Oliver.conner@gmail.com
+                  Sign in
                 </span>
               </a>
             </li>

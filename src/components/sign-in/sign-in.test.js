@@ -6,7 +6,11 @@ import SignIn from './sign-in.jsx';
 
 it(`SignIn correctly renders`, () => {
   const signIn = renderer
-    .create(<SignIn />)
+    .create(<SignIn
+      onChange={jest.fn()}
+      onLogIn={jest.fn()}
+      user={{}}
+    />)
     .toJSON();
 
   expect(signIn).toMatchSnapshot();

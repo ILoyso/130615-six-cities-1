@@ -21,10 +21,16 @@ const placeMock = [
 it(`App correctly renders`, () => {
   const app = renderer
     .create(<App
+      changeAuthorizationStatus={jest.fn()}
       changeCity={jest.fn()}
+      checkAuthorization={jest.fn()}
       cities={[`Amsterdam`, `Amsterdam2`]}
       city={`Amsterdam`}
+      isAuthorizationRequired={false}
+      isAuthorized={false}
+      logIn={jest.fn()}
       places={placeMock}
+      user={{}}
     />).toJSON();
 
   expect(app).toMatchSnapshot();

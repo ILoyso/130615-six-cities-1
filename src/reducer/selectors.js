@@ -5,6 +5,7 @@ import NameSpace from './name-spaces';
 
 const NAME_SPACE_CITIES = NameSpace.CITIES;
 const NAME_SPACE_DATA = NameSpace.DATA;
+const NAME_SPACE_USER = NameSpace.USER;
 
 
 /**
@@ -14,6 +15,36 @@ const NAME_SPACE_DATA = NameSpace.DATA;
  */
 export const getCity = (state) => {
   return state[NAME_SPACE_CITIES].city;
+};
+
+
+/**
+ * Function for get city
+ * @param {Object} state
+ * @return {*}
+ */
+export const getUser = (state) => {
+  return state[NAME_SPACE_USER].user;
+};
+
+
+/**
+ * Function for get authorization status
+ * @param {Object} state
+ * @return {*}
+ */
+export const getAuthorizationStatus = (state) => {
+  return state[NAME_SPACE_USER].isAuthorizationRequired;
+};
+
+
+/**
+ * Function for get current user authorized status
+ * @param {Object} state
+ * @return {*}
+ */
+export const getAuthorizedStatus = (state) => {
+  return state[NAME_SPACE_USER].isAuthorized;
 };
 
 
@@ -38,6 +69,11 @@ export const getCities = createSelector(
 );
 
 
+/**
+ * Function for get all current places (sort by current city)
+ * @param {Object} state
+ * @return {Array}
+ */
 export const getCurrentPlaces = createSelector(
     getCity,
     getPlaces,

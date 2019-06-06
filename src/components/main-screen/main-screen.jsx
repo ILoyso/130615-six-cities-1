@@ -5,7 +5,7 @@ import PlacesList from '../places-list/places-list.jsx';
 import PlacesMap from '../places-map/places-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 
-import withActiveItem from '../../hocs/with-active-item';
+import withActiveItem from '../../hocs/with-active-item/with-active-item';
 
 
 const PlacesListWrapped = withActiveItem(PlacesList);

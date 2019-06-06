@@ -31,6 +31,7 @@ exports[`SignIn correctly renders 1`] = `
           <input
             className="login__input form__input"
             name="email"
+            onChange={[MockFunction]}
             placeholder="Email"
             required=""
             type="email"
@@ -47,6 +48,7 @@ exports[`SignIn correctly renders 1`] = `
           <input
             className="login__input form__input"
             name="password"
+            onChange={[MockFunction]}
             placeholder="Password"
             required=""
             type="password"
@@ -54,6 +56,7 @@ exports[`SignIn correctly renders 1`] = `
         </div>
         <button
           className="login__submit form__submit button"
+          onClick={[MockFunction]}
           type="submit"
         >
           Sign in
