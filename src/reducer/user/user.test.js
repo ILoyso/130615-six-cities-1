@@ -12,7 +12,7 @@ describe(`Reducer works correctly`, () => {
     const dispatch = jest.fn();
     const api = createAPI(dispatch);
     const apiMock = new MockAdapter(api);
-    const getAuthorization = Operation.getUserData();
+    const getAuthorization = Operation.checkAuth();
 
     apiMock
       .onGet(`/login`)
@@ -40,7 +40,7 @@ describe(`Reducer works correctly`, () => {
 
     return logIn(dispatch, jest.fn(), api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOG_IN,
           payload: [{fake: true}],

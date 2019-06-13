@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Operation} from '../../reducer/user/user';
+import {compose} from 'recompose';
 
 
 /**
@@ -72,4 +75,14 @@ const withAuthorization = (Component) => {
 };
 
 
-export default withAuthorization;
+const mapDispatchToProps = (dispatch) => ({
+  onLogIn: (data) => dispatch(Operation.logIn(data)),
+});
+
+
+export {withAuthorization};
+
+export default compose(
+    connect(null, mapDispatchToProps),
+    withAuthorization
+);

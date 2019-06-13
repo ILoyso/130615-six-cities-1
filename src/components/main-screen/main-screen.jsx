@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import PlacesList from '../places-list/places-list.jsx';
 import PlacesMap from '../places-map/places-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import {getCities, getCity, getCurrentPlaces} from '../../reducer/selectors';
+import {ActionCreator as CitiesActionCreator} from '../../reducer/cities/cities';
 
 
 const PlacesListWrapped = withActiveItem(PlacesList);
@@ -73,6 +76,31 @@ const MainScreen = (props) => {
 };
 
 
+/**
+ * Function for connect state with current component
+ * @param {Object} state
+ * @param {Object} ownProps
+ * @return {Object}
+ */
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  city: getCity(state),
+  cities: getCities(state),
+  places: getCurrentPlaces(state),
+});
+
+
+/**
+ * Function for connect action creator methods with current component
+ * @param {Function} dispatch
+ * @return {Object}
+ */
+const mapDispatchToProps = (dispatch) => ({
+  changeCity: (city) => {
+    dispatch(CitiesActionCreator.changeCity(city));
+  },
+});
+
+
 MainScreen.propTypes = {
   changeCity: PropTypes.func.isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -89,4 +117,6 @@ MainScreen.propTypes = {
 };
 
 
-export default MainScreen;
+export {MainScreen};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);
