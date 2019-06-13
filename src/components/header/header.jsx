@@ -1,5 +1,9 @@
 import React from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+
+import {getAuthorizationStatus, getUser} from '../../reducer/selectors';
 
 
 /**
@@ -9,8 +13,7 @@ import PropTypes from "prop-types";
  */
 const Header = (props) => {
   const {
-    isAuthorized,
-    onSignInClick,
+    isAuthorizationRequired,
     user
   } = props;
 
@@ -41,23 +44,13 @@ const Header = (props) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
+                <Link className="header__nav-link header__nav-link--profile" to={`${isAuthorizationRequired ? `/login` : `#`}`}>
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                  {isAuthorized ?
-                    <span
-                      className="header__user-name user__name"
-                    >
-                      {user.email}
-                    </span>
-                    :
-                    <span
-                      className="header__login"
-                      onClick={onSignInClick}
-                    >
-                    Sign in
-                    </span>
+                  {isAuthorizationRequired
+                    ? <span>Sign in</span>
+                    : <span className="header__user-name user__name">{user.email}</span>
                   }
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -68,10 +61,24 @@ const Header = (props) => {
 };
 
 
+/**
+ * Function for connect state with current component
+ * @param {Object} state
+ * @param {Object} ownProps
+ * @return {Object}
+ */
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  isAuthorizationRequired: getAuthorizationStatus(state),
+  user: getUser(state)
+});
+
+
 Header.propTypes = {
-  isAuthorized: PropTypes.bool.isRequired,
-  onSignInClick: PropTypes.func.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired
 };
 
-export default Header;
+
+export {Header};
+
+export default connect(mapStateToProps)(Header);

@@ -6,8 +6,10 @@ import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 
 import reducer from './reducer/reducer';
-import {Operation} from './reducer/data/data';
 import {createAPI} from './api';
+import {Operation as DataOperation} from './reducer/data/data';
+import {Operation as UserOperation} from './reducer/user/user';
+
 import App from './components/app/app.jsx';
 
 
@@ -25,7 +27,8 @@ const init = () => {
   );
   /* eslint-enable */
 
-  store.dispatch(Operation.loadPlaces());
+  store.dispatch(DataOperation.loadPlaces());
+  store.dispatch(UserOperation.checkAuth());
 
   // React render for App component
   ReactDOM.render(<Provider store={store}>

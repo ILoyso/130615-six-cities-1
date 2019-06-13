@@ -39,16 +39,6 @@ export const getAuthorizationStatus = (state) => {
 
 
 /**
- * Function for get current user authorized status
- * @param {Object} state
- * @return {*}
- */
-export const getAuthorizedStatus = (state) => {
-  return state[NAME_SPACE_USER].isAuthorized;
-};
-
-
-/**
  * Function for get all places
  * @param {Object} state
  * @return {Array}

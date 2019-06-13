@@ -1,37 +1,13 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import {configure, shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import App from './app.jsx';
 
-import {App} from './app.jsx';
-
-
-const placeMock = [
-  {
-    city: `Amsterdam`,
-    coordinates: [52.3909553943508, 4.85309666406198],
-    img: `apartment-01.jpg`,
-    isPremium: true,
-    price: 120,
-    rating: 93,
-    title: `Beautiful & luxurious apartment at great location`,
-    type: `apartment`
-  }
-];
+configure({adapter: new Adapter()});
 
 
 it(`App correctly renders`, () => {
-  const app = renderer
-    .create(<App
-      changeAuthorizationStatus={jest.fn()}
-      changeCity={jest.fn()}
-      checkAuthorization={jest.fn()}
-      cities={[`Amsterdam`, `Amsterdam2`]}
-      city={`Amsterdam`}
-      isAuthorizationRequired={false}
-      isAuthorized={false}
-      logIn={jest.fn()}
-      places={placeMock}
-      user={{}}
-    />).toJSON();
+  const app = shallow(<App />);
 
   expect(app).toMatchSnapshot();
 });
