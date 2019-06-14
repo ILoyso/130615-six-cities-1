@@ -1,6 +1,6 @@
 import MockAdapter from 'axios-mock-adapter';
 
-import PlacesParser from '../../places-parser/places-parser';
+import PlacesParser from '../../utils/places-parser';
 import {createAPI} from '../../api';
 import {
   ActionCreator,

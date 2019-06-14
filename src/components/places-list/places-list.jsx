@@ -17,7 +17,6 @@ const PlacesList = (props) => {
       key={index}
       onCardHover={setActiveItem}
       onCardImageClick={setActiveItem}
-      onTitleClick={() => {}}
     />)}
   </div>;
 };
@@ -25,6 +24,7 @@ const PlacesList = (props) => {
 
 PlacesList.propTypes = {
   places: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,

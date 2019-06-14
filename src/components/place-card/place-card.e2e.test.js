@@ -9,6 +9,7 @@ Enzyme.configure({adapter: new Adapter()});
 
 const placeMock = {
   info: {
+    id: 1,
     img: `apartment-01.jpg`,
     isPremium: true,
     price: 120,
@@ -23,27 +24,6 @@ const placeMock = {
 
 
 describe(`PlaceCard Component`, () => {
-  it(`Click on place card title correctly works`, () => {
-    const {
-      info,
-      onCardHover,
-      onCardImageClick,
-      onTitleClick
-    } = placeMock;
-
-    const placeCard = shallow(<PlaceCard
-      info={info}
-      onCardHover={onCardHover}
-      onCardImageClick={onCardImageClick}
-      onTitleClick={onTitleClick}
-    />);
-
-    const startButton = placeCard.find(`.place-card__name a`);
-    startButton.simulate(`click`);
-
-    expect(placeMock.onTitleClick).toHaveBeenCalledTimes(1);
-  });
-
   it(`Click on place card image returns active card`, () => {
     const {
       info,

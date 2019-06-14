@@ -1,4 +1,4 @@
-import PlacesParser from '../../places-parser/places-parser';
+import PlacesParser from '../../utils/places-parser';
 
 
 const initialState = {
