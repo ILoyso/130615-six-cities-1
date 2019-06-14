@@ -1,10 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {MemoryRouter} from 'react-router-dom';
 
 import PlacesList from './places-list.jsx';
 
 const placeMock = [
   {
+    id: 1,
     img: `apartment-01.jpg`,
     isPremium: true,
     price: 120,
@@ -16,10 +18,12 @@ const placeMock = [
 
 it(`PlacesList correctly renders`, () => {
   const placesList = renderer
-    .create(<PlacesList
-      places={placeMock}
-      setActiveItem={jest.fn()}
-    />)
+    .create(<MemoryRouter>
+      <PlacesList
+        places={placeMock}
+        setActiveItem={jest.fn()}
+      />
+    </MemoryRouter>)
     .toJSON();
 
   expect(placesList).toMatchSnapshot();

@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
+
+import {getRatingInPercent} from '../../utils/utils';
 
 
 /**
@@ -11,11 +14,11 @@ const PlaceCard = (props) => {
   const {
     info,
     onCardHover,
-    onCardImageClick,
-    onTitleClick
+    onCardImageClick
   } = props;
 
   const {
+    id,
     img,
     isPremium,
     price,
@@ -52,14 +55,12 @@ const PlaceCard = (props) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `${rating}%`}}></span>
+          <span style={{width: `${getRatingInPercent(rating)}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#" onClick={() => {
-          onTitleClick();
-        }}>{title}</a>
+        <Link to={`/offer/${id}`}>{title}</Link>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>
@@ -69,6 +70,7 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   info: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
@@ -77,8 +79,7 @@ PlaceCard.propTypes = {
     type: PropTypes.string.isRequired,
   }).isRequired,
   onCardHover: PropTypes.func.isRequired,
-  onCardImageClick: PropTypes.func.isRequired,
-  onTitleClick: PropTypes.func.isRequired,
+  onCardImageClick: PropTypes.func.isRequired
 };
 
 

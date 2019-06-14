@@ -78,7 +78,7 @@ exports[`Place card correctly renders 1`] = `
         <span
           style={
             Object {
-              "width": "93%",
+              "width": "1860%",
             }
           }
         />
@@ -93,7 +93,7 @@ exports[`Place card correctly renders 1`] = `
       className="place-card__name"
     >
       <a
-        href="#"
+        href="/offer/1"
         onClick={[Function]}
       >
         Beautiful & luxurious apartment at great location

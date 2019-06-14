@@ -15,15 +15,15 @@ export default class PlacesParser {
     this.description = data[`description`];
     this.goods = data[`goods`];
     this.host = {
+      avatar: data[`host`][`avatar_url`],
       id: data[`host`][`id`],
       isPro: data[`host`][`is_pro`],
       name: data[`host`][`name`],
-      avatar: data[`host`][`avatar_url`],
     };
     this.id = data[`id`];
-    this.isFavorite = data[`is_favorite`];
     this.images = data[`images`];
     this.img = data[`preview_image`];
+    this.isFavorite = data[`is_favorite`];
     this.isPremium = data[`is_premium`];
     this.maxAdults = data[`max_adults`];
     this.price = data[`price`];

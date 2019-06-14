@@ -107,6 +107,7 @@ MainScreen.propTypes = {
   city: PropTypes.string.isRequired,
   places: PropTypes.arrayOf(PropTypes.shape({
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+    id: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
