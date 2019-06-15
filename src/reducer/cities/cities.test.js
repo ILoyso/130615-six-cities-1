@@ -6,7 +6,7 @@ import {
 
 
 describe(`Reducer works correctly`, () => {
-  it(`returns initial state without parameters`, () => {
+  it(`Reducer returns initial state without parameters`, () => {
     expect(reducer(undefined, {})).toEqual({
       city: `Amsterdam`,
     });
@@ -14,14 +14,12 @@ describe(`Reducer works correctly`, () => {
 
   it(`Reducer should change city by a given value`, () => {
     expect(reducer({
-      city: `Amsterdam`,
-      places: []
+      city: `Amsterdam`
     }, {
       type: ActionType.CHANGE_CITY,
       payload: `New City`,
     })).toEqual({
-      city: `New City`,
-      places: []
+      city: `New City`
     });
   });
 });

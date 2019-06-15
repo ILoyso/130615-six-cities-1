@@ -9,7 +9,6 @@ const initialState = {
 
 
 const ActionType = {
-  CHANGE_PLACES: `CHANGE_PLACES`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_PLACES: `LOAD_PLACES`,
 };
@@ -20,24 +19,15 @@ const ActionType = {
  * @return {Object}
  */
 const ActionCreator = {
-  changePlaces: (places) => ({
-    type: ActionType.CHANGE_PLACES,
-    payload: places
+  loadComments: (comments) => ({
+    type: ActionType.LOAD_COMMENTS,
+    payload: comments,
   }),
 
-  loadComments: (comments) => {
-    return {
-      type: ActionType.LOAD_COMMENTS,
-      payload: comments,
-    };
-  },
-
-  loadPlaces: (places) => {
-    return {
-      type: ActionType.LOAD_PLACES,
-      payload: places,
-    };
-  }
+  loadPlaces: (places) => ({
+    type: ActionType.LOAD_PLACES,
+    payload: places,
+  })
 };
 
 
@@ -67,11 +57,6 @@ const Operation = {
  */
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_PLACES:
-      return Object.assign({}, state, {
-        places: action.payload,
-      });
-
     case ActionType.LOAD_COMMENTS:
       return Object.assign({}, state, {
         comments: action.payload,
