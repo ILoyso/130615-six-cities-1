@@ -7,8 +7,8 @@ import PlacesMap from '../places-map/places-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
-import {getCities, getCity, getCurrentPlaces} from '../../reducer/selectors';
-import {ActionCreator as CitiesActionCreator} from '../../reducer/cities/cities';
+import {getCities, getCity, getCurrentPlaces} from '../../reducer/data/selectors';
+import {ActionCreator} from '../../reducer/data/data';
 
 
 const PlacesListWrapped = withActiveItem(PlacesList);
@@ -98,7 +98,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
  */
 const mapDispatchToProps = (dispatch) => ({
   changeCity: (city) => {
-    dispatch(CitiesActionCreator.changeCity(city));
+    dispatch(ActionCreator.changeCity(city));
   },
 });
 

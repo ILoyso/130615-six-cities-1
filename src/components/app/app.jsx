@@ -11,7 +11,7 @@ import PlaceProperty from '../place-property/place-property.jsx';
 
 import withAuthorization from '../../hocs/with-authorization/with-authorization';
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
-import {getCurrentPlaces} from '../../reducer/selectors';
+import {getCurrentPlaces} from '../../reducer/data/selectors';
 
 
 const SignInWrapped = withPrivateRoute(withAuthorization(SignIn), `/`);

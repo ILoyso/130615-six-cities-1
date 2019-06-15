@@ -1,11 +1,9 @@
 import {createSelector} from 'reselect';
 
-import NameSpace from './name-spaces';
+import NameSpace from '../name-spaces';
 
 
-const NAME_SPACE_CITIES = NameSpace.CITIES;
 const NAME_SPACE_DATA = NameSpace.DATA;
-const NAME_SPACE_USER = NameSpace.USER;
 
 
 /**
@@ -14,8 +12,9 @@ const NAME_SPACE_USER = NameSpace.USER;
  * @return {*}
  */
 export const getCity = (state) => {
-  return state[NAME_SPACE_CITIES].city;
+  return state[NAME_SPACE_DATA].city;
 };
+
 
 /**
  * Function for get comments
@@ -24,26 +23,6 @@ export const getCity = (state) => {
  */
 export const getComments = (state) => {
   return state[NAME_SPACE_DATA].comments;
-};
-
-
-/**
- * Function for get city
- * @param {Object} state
- * @return {*}
- */
-export const getUser = (state) => {
-  return state[NAME_SPACE_USER].user;
-};
-
-
-/**
- * Function for get authorization status
- * @param {Object} state
- * @return {*}
- */
-export const getAuthorizationStatus = (state) => {
-  return state[NAME_SPACE_USER].isAuthorizationRequired;
 };
 
 

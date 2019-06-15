@@ -6,7 +6,7 @@ import ReviewsList from '../reviews-list/reviews-list.jsx';
 
 import {getRatingInPercent} from '../../utils/utils';
 import {Operation} from '../../reducer/data/data';
-import {getComments} from '../../reducer/selectors';
+import {getComments} from '../../reducer/data/selectors';
 
 
 // PlaceProperty component
@@ -118,7 +118,6 @@ class PlaceProperty extends React.PureComponent {
             <ReviewsList
               comments={comments}
             />
-
           </div>
         </div>
         <section className="property__map map"></section>
@@ -230,19 +229,11 @@ class PlaceProperty extends React.PureComponent {
 
   /**
    * Method is invoked immediately after a component is mounted (inserted into the tree)
-   * Here ...
+   * Here is comments downloaded
    */
   componentDidMount() {
     const {place} = this.props;
     this.props.loadComments(place.id);
-  }
-
-  /**
-   * Method is invoked when component is updated
-   * Here ...
-   */
-  componentDidUpdate() {
-
   }
 }
 

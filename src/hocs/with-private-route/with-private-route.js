@@ -4,8 +4,7 @@ import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import {Redirect} from 'react-router-dom';
 
-
-import {getAuthorizationStatus} from '../../reducer/selectors';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 
 const withPrivateRoute = (Component, anotherPath = undefined) => {

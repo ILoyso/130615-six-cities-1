@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {getAuthorizationStatus, getUser} from '../../reducer/selectors';
+import {getAuthorizationStatus, getUser} from '../../reducer/user/selectors';
 
 
 /**

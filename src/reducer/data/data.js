@@ -3,12 +3,14 @@ import CommentsParser from '../../utils/comments-parser';
 
 
 const initialState = {
+  city: `Amsterdam`,
   comments: [],
   places: []
 };
 
 
 const ActionType = {
+  CHANGE_CITY: `CHANGE_CITY`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_PLACES: `LOAD_PLACES`,
 };
@@ -19,6 +21,11 @@ const ActionType = {
  * @return {Object}
  */
 const ActionCreator = {
+  changeCity: (city) => ({
+    type: ActionType.CHANGE_CITY,
+    payload: city
+  }),
+
   loadComments: (comments) => ({
     type: ActionType.LOAD_COMMENTS,
     payload: comments,
@@ -57,6 +64,11 @@ const Operation = {
  */
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.CHANGE_CITY:
+      return Object.assign({}, state, {
+        city: action.payload
+      });
+
     case ActionType.LOAD_COMMENTS:
       return Object.assign({}, state, {
         comments: action.payload,

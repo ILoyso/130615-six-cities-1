@@ -116,13 +116,26 @@ describe(`Operation work correctly`, () => {
 describe(`Reducer works correctly`, () => {
   it(`returns initial state without parameters`, () => {
     expect(reducer(undefined, {})).toEqual({
+      city: `Amsterdam`,
       comments: [],
       places: []
     });
   });
 
+  it(`Reducer should change city by a given value`, () => {
+    expect(reducer({
+      city: `Amsterdam`
+    }, {
+      type: ActionType.CHANGE_CITY,
+      payload: `New City`,
+    })).toEqual({
+      city: `New City`
+    });
+  });
+
   it(`Reducer should change places by a given value`, () => {
     expect(reducer({
+      city: `Amsterdam`,
       comments: [],
       places: []
     }, {
@@ -139,6 +152,7 @@ describe(`Reducer works correctly`, () => {
         }
       ],
     })).toEqual({
+      city: `Amsterdam`,
       comments: [],
       places: [
         {
@@ -156,6 +170,7 @@ describe(`Reducer works correctly`, () => {
 
   it(`Reducer should change comments by a given value`, () => {
     expect(reducer({
+      city: `Amsterdam`,
       comments: [],
       places: []
     }, {
@@ -173,6 +188,7 @@ describe(`Reducer works correctly`, () => {
         }
       ],
     })).toEqual({
+      city: `Amsterdam`,
       comments: [
         {
           user: {
@@ -191,6 +207,13 @@ describe(`Reducer works correctly`, () => {
 });
 
 describe(`Action creators work correctly`, () => {
+  it(`Action creator for change city correctly change it`, () => {
+    expect(ActionCreator.changeCity(`Amsterdam`)).toEqual({
+      type: ActionType.CHANGE_CITY,
+      payload: `Amsterdam`
+    });
+  });
+
   it(`Action creator for load places correctly works`, () => {
     expect(ActionCreator.loadPlaces([
       {
