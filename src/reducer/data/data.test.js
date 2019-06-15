@@ -13,6 +13,7 @@ import {
 describe(`Reducer works correctly`, () => {
   it(`returns initial state without parameters`, () => {
     expect(reducer(undefined, {})).toEqual({
+      comments: [],
       places: []
     });
   });

@@ -17,6 +17,15 @@ export const getCity = (state) => {
   return state[NAME_SPACE_CITIES].city;
 };
 
+/**
+ * Function for get comments
+ * @param {Object} state
+ * @return {*}
+ */
+export const getComments = (state) => {
+  return state[NAME_SPACE_DATA].comments;
+};
+
 
 /**
  * Function for get city

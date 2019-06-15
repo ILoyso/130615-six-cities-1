@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import PlaceProperty from './place-property.jsx';
+import {PlaceProperty} from './place-property.jsx';
 
 
 const placeMock = {
@@ -13,6 +13,7 @@ const placeMock = {
     isPro: true,
     name: `testName`,
   },
+  id: 1,
   images: [`Img1`, `Img2`],
   isPremium: true,
   maxAdults: 5,
@@ -22,9 +23,22 @@ const placeMock = {
   type: `Test Type`,
 };
 
+const commentMock = [{
+  user: {
+    isPro: true,
+    name: `name`,
+    avatar: `avatar`,
+  },
+  rating: 4,
+  comment: `comment`,
+  date: `date`,
+}];
+
 it(`PlaceProperty correctly renders`, () => {
   const placeProperty = renderer
     .create(<PlaceProperty
+      comments={commentMock}
+      loadComments={jest.fn()}
       place={placeMock}
     />)
     .toJSON();

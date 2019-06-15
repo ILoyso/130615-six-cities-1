@@ -1,13 +1,16 @@
 import PlacesParser from '../../utils/places-parser';
+import CommentsParser from '../../utils/comments-parser';
 
 
 const initialState = {
+  comments: [],
   places: []
 };
 
 
 const ActionType = {
   CHANGE_PLACES: `CHANGE_PLACES`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_PLACES: `LOAD_PLACES`,
 };
 
@@ -22,6 +25,13 @@ const ActionCreator = {
     payload: places
   }),
 
+  loadComments: (comments) => {
+    return {
+      type: ActionType.LOAD_COMMENTS,
+      payload: comments,
+    };
+  },
+
   loadPlaces: (places) => {
     return {
       type: ActionType.LOAD_PLACES,
@@ -32,6 +42,13 @@ const ActionCreator = {
 
 
 const Operation = {
+  loadComments: (id) => (dispatch, _getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        dispatch(ActionCreator.loadComments(CommentsParser.parseComments(response.data)));
+      });
+  },
+
   loadPlaces: () => (dispatch, _getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
@@ -53,6 +70,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_PLACES:
       return Object.assign({}, state, {
         places: action.payload,
+      });
+
+    case ActionType.LOAD_COMMENTS:
+      return Object.assign({}, state, {
+        comments: action.payload,
       });
 
     case ActionType.LOAD_PLACES:
