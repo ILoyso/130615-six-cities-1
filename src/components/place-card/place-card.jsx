@@ -12,6 +12,8 @@ import {getRatingInPercent} from '../../utils/utils';
  */
 const PlaceCard = (props) => {
   const {
+    classCard,
+    classMain,
     info,
     onCardHover,
     onCardImageClick
@@ -27,13 +29,13 @@ const PlaceCard = (props) => {
     type
   } = info;
 
-  return <article className="cities__place-card place-card" onMouseEnter={() => {
+  return <article className={`${classCard} place-card`} onMouseEnter={() => {
     onCardHover(info);
   }}>
     {isPremium && <div className="place-card__mark">
       <span>Premium</span>
     </div>}
-    <div className="cities__image-wrapper place-card__image-wrapper">
+    <div className={`${classMain}__image-wrapper place-card__image-wrapper`}>
       <a href="#" onClick={() => {
         onCardImageClick(info);
       }}>
@@ -46,7 +48,7 @@ const PlaceCard = (props) => {
           <b className="place-card__price-value">&euro;{price}</b>
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
-        <button className="place-card__bookmark-button button" type="button">
+        <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
@@ -69,6 +71,8 @@ const PlaceCard = (props) => {
 
 
 PlaceCard.propTypes = {
+  classCard: PropTypes.string,
+  classMain: PropTypes.string,
   info: PropTypes.shape({
     id: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,

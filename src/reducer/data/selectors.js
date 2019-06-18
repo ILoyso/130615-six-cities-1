@@ -1,6 +1,7 @@
 import {createSelector} from 'reselect';
 
 import NameSpace from '../name-spaces';
+import {calcDistance} from '../../utils/utils';
 
 
 const NAME_SPACE_DATA = NameSpace.DATA;
@@ -57,3 +58,22 @@ export const getCurrentPlaces = createSelector(
     getPlaces,
     (city, places) => places.filter((place) => place.city === city)
 );
+
+
+/**
+ * Function for find three nearest places
+ * @param {Object} state
+ * @param {Number} id
+ * @return {*}
+ */
+export const getNearestPlaces = (state, id) => {
+  const allPlaces = getCurrentPlaces(state);
+  const currentPlace = allPlaces.find((place) => place.id === id);
+
+  return allPlaces.sort((a, b) => {
+    const firstDist = calcDistance(currentPlace.coordinates, a.coordinates);
+    const secondDist = calcDistance(currentPlace.coordinates, b.coordinates);
+
+    return firstDist - secondDist;
+  }).slice(1, 4);
+};

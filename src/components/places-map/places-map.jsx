@@ -39,7 +39,9 @@ class PlacesMap extends React.PureComponent {
    * @return {*}
    */
   render() {
-    return <section className="cities__map map">
+    const className = this.props.className;
+
+    return <section className={`${className}__map map`}>
       <div
         ref={this._mapRef}
         style={{height: `100%`}}
@@ -132,6 +134,7 @@ class PlacesMap extends React.PureComponent {
 
 PlacesMap.propTypes = {
   city: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
   places: PropTypes.arrayOf(PropTypes.shape({
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
     img: PropTypes.string.isRequired,

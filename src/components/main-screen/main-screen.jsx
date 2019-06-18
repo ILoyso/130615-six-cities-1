@@ -62,12 +62,14 @@ const MainScreen = (props) => {
             </select> */}
             </form>
             <PlacesListWrapped
+              classHelper={`cities`}
               places={places}
             />
           </section>
           <div className="cities__right-section">
             <PlacesMap
               city={city}
+              className={`cities`}
               places={places}
             />
           </div>
