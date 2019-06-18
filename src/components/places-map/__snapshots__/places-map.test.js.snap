@@ -2,7 +2,7 @@
 
 exports[`PlacesMap renders correctly 1`] = `
 <section
-  className="cities__map map"
+  className="Class Name__map map"
 >
   <div
     style={

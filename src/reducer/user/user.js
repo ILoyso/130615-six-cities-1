@@ -11,7 +11,6 @@ const initialState = {
 
 
 const ActionType = {
-  GET_USER_DATA: `GET_USER_DATA`,
   LOG_IN: `LOG_IN`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
 };
@@ -22,13 +21,6 @@ const ActionType = {
  * @return {Object}
  */
 const ActionCreator = {
-  getUserData: (status) => {
-    return {
-      type: ActionType.GET_USER_DATA,
-      payload: status,
-    };
-  },
-
   logIn: (status) => {
     return {
       type: ActionType.LOG_IN,
@@ -51,7 +43,7 @@ const Operation = {
       return api.get(`/login`)
         .then((response) => {
           if (response.status === 200) {
-            dispatch(ActionCreator.getUserData(response.data));
+            dispatch(ActionCreator.logIn(response.data));
           }
         });
     };
@@ -81,16 +73,6 @@ const Operation = {
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
-    case ActionType.GET_USER_DATA: return Object.assign({}, state, {
-      user: {
-        avatarUrl: action.payload[`avatar_url`],
-        email: action.payload[`email`],
-        id: action.payload[`id`],
-        isPro: action.payload[`is_pro`],
-        name: action.payload[`name`],
-      }
-    });
-
     case ActionType.LOG_IN: return Object.assign({}, state, {
       user: {
         avatarUrl: action.payload[`avatar_url`],

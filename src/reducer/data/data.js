@@ -1,13 +1,17 @@
 import PlacesParser from '../../utils/places-parser';
+import CommentsParser from '../../utils/comments-parser';
 
 
 const initialState = {
+  city: `Amsterdam`,
+  comments: [],
   places: []
 };
 
 
 const ActionType = {
-  CHANGE_PLACES: `CHANGE_PLACES`,
+  CHANGE_CITY: `CHANGE_CITY`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_PLACES: `LOAD_PLACES`,
 };
 
@@ -17,21 +21,31 @@ const ActionType = {
  * @return {Object}
  */
 const ActionCreator = {
-  changePlaces: (places) => ({
-    type: ActionType.CHANGE_PLACES,
-    payload: places
+  changeCity: (city) => ({
+    type: ActionType.CHANGE_CITY,
+    payload: city
   }),
 
-  loadPlaces: (places) => {
-    return {
-      type: ActionType.LOAD_PLACES,
-      payload: places,
-    };
-  }
+  loadComments: (comments) => ({
+    type: ActionType.LOAD_COMMENTS,
+    payload: comments,
+  }),
+
+  loadPlaces: (places) => ({
+    type: ActionType.LOAD_PLACES,
+    payload: places,
+  })
 };
 
 
 const Operation = {
+  loadComments: (id) => (dispatch, _getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        dispatch(ActionCreator.loadComments(CommentsParser.parseComments(response.data)));
+      });
+  },
+
   loadPlaces: () => (dispatch, _getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
@@ -50,9 +64,14 @@ const Operation = {
  */
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_PLACES:
+    case ActionType.CHANGE_CITY:
       return Object.assign({}, state, {
-        places: action.payload,
+        city: action.payload
+      });
+
+    case ActionType.LOAD_COMMENTS:
+      return Object.assign({}, state, {
+        comments: action.payload,
       });
 
     case ActionType.LOAD_PLACES:

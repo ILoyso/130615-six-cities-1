@@ -7,12 +7,37 @@ import PlaceCard from '../place-card/place-card.jsx';
 // Component for rendering list of places
 const PlacesList = (props) => {
   const {
+    classHelper,
     places,
     setActiveItem
   } = props;
 
-  return <div className="cities__places-list places__list tabs__content">
+  let mainClass = classHelper || null;
+  let listClass = null;
+  let cardClass = null;
+
+  switch (classHelper) {
+    case `cities`: {
+      listClass = `cities__places-list`;
+      cardClass = `cities__place-card`;
+      break;
+    }
+
+    case `near`: {
+      listClass = `near-places__list`;
+      cardClass = `near-places__card`;
+      break;
+    }
+
+    default: {
+      return null;
+    }
+  }
+
+  return <div className={`${listClass} places__list tabs__content`}>
     {places.map((place, index) => <PlaceCard
+      classCard={cardClass}
+      classMain={mainClass}
       info={place}
       key={index}
       onCardHover={setActiveItem}
@@ -23,6 +48,7 @@ const PlacesList = (props) => {
 
 
 PlacesList.propTypes = {
+  classHelper: PropTypes.string,
   places: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,

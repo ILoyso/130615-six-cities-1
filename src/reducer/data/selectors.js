@@ -1,11 +1,10 @@
 import {createSelector} from 'reselect';
 
-import NameSpace from './name-spaces';
+import NameSpace from '../name-spaces';
+import {calcDistance} from '../../utils/utils';
 
 
-const NAME_SPACE_CITIES = NameSpace.CITIES;
 const NAME_SPACE_DATA = NameSpace.DATA;
-const NAME_SPACE_USER = NameSpace.USER;
 
 
 /**
@@ -14,27 +13,17 @@ const NAME_SPACE_USER = NameSpace.USER;
  * @return {*}
  */
 export const getCity = (state) => {
-  return state[NAME_SPACE_CITIES].city;
+  return state[NAME_SPACE_DATA].city;
 };
 
 
 /**
- * Function for get city
+ * Function for get comments
  * @param {Object} state
  * @return {*}
  */
-export const getUser = (state) => {
-  return state[NAME_SPACE_USER].user;
-};
-
-
-/**
- * Function for get authorization status
- * @param {Object} state
- * @return {*}
- */
-export const getAuthorizationStatus = (state) => {
-  return state[NAME_SPACE_USER].isAuthorizationRequired;
+export const getComments = (state) => {
+  return state[NAME_SPACE_DATA].comments;
 };
 
 
@@ -69,3 +58,22 @@ export const getCurrentPlaces = createSelector(
     getPlaces,
     (city, places) => places.filter((place) => place.city === city)
 );
+
+
+/**
+ * Function for find three nearest places
+ * @param {Object} state
+ * @param {Number} id
+ * @return {*}
+ */
+export const getNearestPlaces = (state, id) => {
+  const allPlaces = getCurrentPlaces(state);
+  const currentPlace = allPlaces.find((place) => place.id === id);
+
+  return allPlaces.sort((a, b) => {
+    const firstDist = calcDistance(currentPlace.coordinates, a.coordinates);
+    const secondDist = calcDistance(currentPlace.coordinates, b.coordinates);
+
+    return firstDist - secondDist;
+  }).slice(1, 4);
+};
