@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import Header from '../header/header.jsx';
 import MainScreen from '../main-screen/main-screen.jsx';
+import MainScreenEmpty from '../main-screen-empty/main-screen-empty.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import Favorites from '../favorites/favorites.jsx';
 import PlaceProperty from '../place-property/place-property.jsx';
@@ -17,6 +18,7 @@ import {getCurrentPlaces} from '../../reducer/data/selectors';
 
 
 const MainScreenWrapped = withActiveItem(withSorting(MainScreen));
+const MainScreenEmptyWrapped = withActiveItem(withSorting(MainScreenEmpty));
 const SignInWrapped = withPrivateRoute(withAuthorization(SignIn), `/`);
 const FavoritesWrapped = withPrivateRoute(Favorites);
 
@@ -32,7 +34,12 @@ const App = (props) => {
   return <BrowserRouter>
     <Header />
     <Switch>
-      <Route exact path="/" render={() => <MainScreenWrapped />}></Route>
+      <Route exact path="/" render={() => {
+        if (places.length === 0) {
+          return <MainScreenEmptyWrapped />;
+        }
+        return <MainScreenWrapped />;
+      }}></Route>
       <Route path="/login" render={() => <SignInWrapped />}></Route>
       <Route path="/favorites" render={() => <FavoritesWrapped />} />
 
