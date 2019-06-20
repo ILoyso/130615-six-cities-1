@@ -45,12 +45,26 @@ describe(`withSorting`, () => {
     expect(component.state().sortingPlaces).toEqual(placesMock);
   });
 
+  it(`Sorting without parameter correctly works`, () => {
+    const component = shallow(<MockComponentWrapped
+      places={placesMock}
+    />);
+
+    expect(component.state().activeOption.id).toEqual(`popular`);
+
+    component.props().onChangeSorting();
+
+    expect(component.state().activeOption.id).toEqual(`popular`);
+    expect(component.state().options).toEqual(SORTING_OPTIONS);
+    expect(component.state().sortingPlaces).toEqual(placesMock);
+  });
+
   it(`Sorting from low to hide correctly works`, () => {
     const component = shallow(<MockComponentWrapped
       places={placesMock}
     />);
 
-    component.props().onChange(`low-to-high`);
+    component.props().onChangeSorting(`low-to-high`);
 
     expect(component.state().activeOption.id).toEqual(`low-to-high`);
     expect(component.state().options).toEqual(SORTING_OPTIONS);
@@ -81,7 +95,7 @@ describe(`withSorting`, () => {
       places={placesMock}
     />);
 
-    component.props().onChange(`high-to-low`);
+    component.props().onChangeSorting(`high-to-low`);
 
     expect(component.state().activeOption.id).toEqual(`high-to-low`);
     expect(component.state().options).toEqual(SORTING_OPTIONS);
@@ -112,7 +126,7 @@ describe(`withSorting`, () => {
       places={placesMock}
     />);
 
-    component.props().onChange(`rating`);
+    component.props().onChangeSorting(`rating`);
 
     expect(component.state().activeOption.id).toEqual(`rating`);
     expect(component.state().options).toEqual(SORTING_OPTIONS);

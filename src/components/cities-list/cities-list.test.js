@@ -8,6 +8,7 @@ it(`CitiesList correctly renders`, () => {
   const citiesList = renderer
     .create(<CitiesList
       changeCity={jest.fn()}
+      changeSorting={jest.fn()}
       cities={[`Amsterdam`, `Amsterdam2`]}
       city={`Amsterdam`}
     />)

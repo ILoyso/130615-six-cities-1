@@ -42,33 +42,11 @@ describe(`PlaceCard Component`, () => {
     />);
 
     const cardImage = placeCard.find(`.place-card__image-wrapper a`);
-    cardImage.simulate(`click`);
+    cardImage.simulate(`click`, {
+      preventDefault: () => {}
+    });
 
     expect(placeMock.onCardImageClick).toHaveBeenCalledTimes(1);
     expect(placeMock.onCardImageClick.mock.results[0].value).toEqual(info);
-  });
-
-  it(`Hover on place card returns active card`, () => {
-    const {
-      info,
-      onCardHover,
-      onCardImageClick,
-      onTitleClick
-    } = placeMock;
-
-    onCardHover.mockReturnValue(info);
-
-    const placeCard = shallow(<PlaceCard
-      info={info}
-      onCardHover={onCardHover}
-      onCardImageClick={onCardImageClick}
-      onTitleClick={onTitleClick}
-    />);
-
-    const card = placeCard.find(`.place-card`);
-    card.simulate(`mouseenter`);
-
-    expect(placeMock.onCardHover).toHaveBeenCalledTimes(1);
-    expect(placeMock.onCardHover.mock.results[0].value).toEqual(info);
   });
 });

@@ -26,14 +26,14 @@ const withSorting = (Component) => {
       };
 
       this.state.activeOption = this.state.options.find((option) => option.id === `popular`);
-      this._onChange = this._onChange.bind(this);
+      this._onChangeSorting = this._onChangeSorting.bind(this);
     }
 
     render() {
       return <Component
         {...this.props}
         activeOption={this.state.activeOption}
-        onChange={this._onChange}
+        onChangeSorting={this._onChangeSorting}
         options={this.state.options}
         sortingPlaces={this.state.sortingPlaces}
       />;
@@ -56,7 +56,7 @@ const withSorting = (Component) => {
      * @param {String} id
      * @private
      */
-    _onChange(id) {
+    _onChangeSorting(id = `popular`) {
       const filteredPlaces = this._filterPlaces(id);
 
       this.setState(Object.assign({}, this.state, {
@@ -72,7 +72,7 @@ const withSorting = (Component) => {
      * @return {Object}
      */
     _filterPlaces(id) {
-      const filteredPlaces = Array.from(this.props.places);
+      const filteredPlaces = this.props.places;
 
       switch (id) {
         case `low-to-high`: {

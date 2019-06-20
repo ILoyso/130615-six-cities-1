@@ -40,7 +40,6 @@ const PlacesList = (props) => {
       classMain={mainClass}
       info={place}
       key={index}
-      onCardHover={setActiveItem}
       onCardImageClick={setActiveItem}
     />)}
   </div>;
