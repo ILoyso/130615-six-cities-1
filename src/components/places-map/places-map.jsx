@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
-import {CITIES_DATA} from '../../cities';
+import {CITIES_DATA} from '../../constants/cities';
 
 const SETTINGS = {
   icon: leaflet.icon({

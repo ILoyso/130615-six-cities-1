@@ -1,36 +1,17 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import {MemoryRouter} from 'react-router-dom';
-
+import {configure, shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import {MainScreen} from './main-screen.jsx';
 
-
-const placeMock = [
-  {
-    city: `Amsterdam`,
-    coordinates: [52.3909553943508, 4.85309666406198],
-    id: 1,
-    img: `apartment-01.jpg`,
-    isPremium: true,
-    price: 120,
-    rating: 93,
-    title: `Beautiful & luxurious apartment at great location`,
-    type: `apartment`
-  }
-];
+configure({adapter: new Adapter()});
 
 
 it(`MainScreen correctly renders`, () => {
-  const mainScreen = renderer
-    .create(<MemoryRouter>
-      <MainScreen
-        changeCity={jest.fn()}
-        cities={[`Amsterdam`, `Amsterdam2`]}
-        city={`Amsterdam`}
-        places={placeMock}
-      />
-    </MemoryRouter>)
-    .toJSON();
+  const mainScreen = shallow(<MainScreen
+    changeCity={jest.fn()}
+    cities={[`Amsterdam`, `Amsterdam2`]}
+    city={`Amsterdam`}
+  />);
 
   expect(mainScreen).toMatchSnapshot();
 });
