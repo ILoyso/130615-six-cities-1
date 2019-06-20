@@ -3,7 +3,6 @@
 exports[`Place card correctly renders 1`] = `
 <article
   className="undefined place-card"
-  onMouseEnter={[Function]}
 >
   <div
     className="place-card__mark"

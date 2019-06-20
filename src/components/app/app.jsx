@@ -9,11 +9,14 @@ import SignIn from '../sign-in/sign-in.jsx';
 import Favorites from '../favorites/favorites.jsx';
 import PlaceProperty from '../place-property/place-property.jsx';
 
+import withSorting from '../../hocs/with-sorting/with-sorting';
+import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import withAuthorization from '../../hocs/with-authorization/with-authorization';
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
 import {getCurrentPlaces} from '../../reducer/data/selectors';
 
 
+const MainScreenWrapped = withActiveItem(withSorting(MainScreen));
 const SignInWrapped = withPrivateRoute(withAuthorization(SignIn), `/`);
 const FavoritesWrapped = withPrivateRoute(Favorites);
 
@@ -29,7 +32,7 @@ const App = (props) => {
   return <BrowserRouter>
     <Header />
     <Switch>
-      <Route exact path="/" render={() => <MainScreen />}></Route>
+      <Route exact path="/" render={() => <MainScreenWrapped />}></Route>
       <Route path="/login" render={() => <SignInWrapped />}></Route>
       <Route path="/favorites" render={() => <FavoritesWrapped />} />
 

@@ -13,7 +13,7 @@ const withActiveItem = (Component) => {
       super(props);
 
       this.state = {
-        activeItem: ``,
+        activeItem: undefined,
       };
 
       this._setActiveItem = this._setActiveItem.bind(this);
@@ -22,6 +22,7 @@ const withActiveItem = (Component) => {
     render() {
       return <Component
         {...this.props}
+        activeItem={this.state.activeItem}
         setActiveItem={this._setActiveItem}
       />;
     }
@@ -30,8 +31,6 @@ const withActiveItem = (Component) => {
       this.setState({
         activeItem: item
       });
-
-      return item;
     }
   }
 

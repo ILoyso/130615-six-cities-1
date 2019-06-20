@@ -475,7 +475,6 @@ exports[`PlaceProperty correctly renders 1`] = `
       >
         <article
           className="near-places__card place-card"
-          onMouseEnter={[Function]}
         >
           <div
             className="place-card__mark"

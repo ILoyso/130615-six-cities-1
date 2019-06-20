@@ -4,11 +4,18 @@ import leaflet from 'leaflet';
 
 import {CITIES_DATA} from '../../constants/cities';
 
+const ICON = leaflet.icon({
+  iconUrl: `img/pin.svg`,
+  iconSize: [30, 30]
+});
+
+const ICON_ACTIVE = leaflet.icon({
+  iconUrl: `img/pin-active.svg`,
+  iconSize: [30, 30]
+});
+
 const SETTINGS = {
-  icon: leaflet.icon({
-    iconUrl: `img/pin.svg`,
-    iconSize: [30, 30]
-  }),
+  icon: ICON,
   marker: true,
   zoom: 12,
   zoomControl: false
@@ -89,10 +96,17 @@ class PlacesMap extends React.PureComponent {
    * @private
    */
   _addPinsToMap(places) {
-    const {icon} = SETTINGS;
+    const {activeItem} = this.props;
 
     places.forEach((place) => {
-      const coordinates = place.coordinates;
+      let {icon} = SETTINGS;
+      let coordinates = place.coordinates;
+
+      if (activeItem && (activeItem.id === place.id)) {
+        icon = ICON_ACTIVE;
+        coordinates = activeItem.coordinates;
+      }
+
       return leaflet
         .marker(coordinates, {icon})
         .addTo(this._map);
@@ -133,6 +147,7 @@ class PlacesMap extends React.PureComponent {
 
 
 PlacesMap.propTypes = {
+  activeItem: PropTypes.object,
   city: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   places: PropTypes.arrayOf(PropTypes.shape({

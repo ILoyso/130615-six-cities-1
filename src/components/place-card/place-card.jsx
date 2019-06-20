@@ -15,7 +15,6 @@ const PlaceCard = (props) => {
     classCard,
     classMain,
     info,
-    onCardHover,
     onCardImageClick
   } = props;
 
@@ -29,14 +28,13 @@ const PlaceCard = (props) => {
     type
   } = info;
 
-  return <article className={`${classCard} place-card`} onMouseEnter={() => {
-    onCardHover(info);
-  }}>
+  return <article className={`${classCard} place-card`}>
     {isPremium && <div className="place-card__mark">
       <span>Premium</span>
     </div>}
     <div className={`${classMain}__image-wrapper place-card__image-wrapper`}>
-      <a href="#" onClick={() => {
+      <a href="#" onClick={(evt) => {
+        evt.preventDefault();
         onCardImageClick(info);
       }}>
         <img className="place-card__image" src={img} width="260" height="200" alt="Place image" />
@@ -82,7 +80,6 @@ PlaceCard.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,
-  onCardHover: PropTypes.func.isRequired,
   onCardImageClick: PropTypes.func.isRequired
 };
 

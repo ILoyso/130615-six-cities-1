@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 const CitiesList = (props) => {
   const {
     changeCity,
+    changeSorting,
     cities,
     city
   } = props;
@@ -24,6 +25,7 @@ const CitiesList = (props) => {
             onClick={(event) => {
               event.preventDefault();
               changeCity(cityName);
+              changeSorting();
             }}
           >
             <span>{cityName}</span>
@@ -37,6 +39,7 @@ const CitiesList = (props) => {
 
 CitiesList.propTypes = {
   changeCity: PropTypes.func.isRequired,
+  changeSorting: PropTypes.func.isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.string.isRequired
 };

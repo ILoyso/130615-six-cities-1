@@ -15,7 +15,7 @@ const WithActiveItem = withActiveItem(MockComponent);
 it(`Should set activeItem`, () => {
   const component = shallow(<WithActiveItem />);
 
-  expect(component.state().activeItem).toEqual(``);
+  expect(component.state().activeItem).toEqual(undefined);
 
   component.props().setActiveItem(`TestItem`);
   expect(component.state().activeItem).toEqual(`TestItem`);
