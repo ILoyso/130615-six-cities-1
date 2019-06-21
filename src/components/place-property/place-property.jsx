@@ -4,12 +4,13 @@ import {connect} from 'react-redux';
 
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 import PlacesList from '../places-list/places-list.jsx';
-import PlacesMap from "../places-map/places-map.jsx";
+import PlacesMap from '../places-map/places-map.jsx';
 
 import {getRatingInPercent} from '../../utils/utils';
 import {Operation} from '../../reducer/data/data';
 import {getComments, getNearestPlaces} from '../../reducer/data/selectors';
-import withActiveItem from "../../hocs/with-active-item/with-active-item";
+import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 
 const PlacesListWrapped = withActiveItem(PlacesList);
@@ -33,6 +34,7 @@ class PlaceProperty extends React.PureComponent {
   render() {
     const {
       comments,
+      isAuthorizationRequired,
       nearestPlaces,
       place,
     } = this.props;
@@ -43,6 +45,7 @@ class PlaceProperty extends React.PureComponent {
       description,
       goods,
       host,
+      id,
       images,
       isPremium,
       maxAdults,
@@ -125,6 +128,8 @@ class PlaceProperty extends React.PureComponent {
 
             <ReviewsList
               comments={comments}
+              id={id}
+              isAuthorizationRequired={isAuthorizationRequired}
             />
           </div>
         </div>
@@ -167,6 +172,7 @@ class PlaceProperty extends React.PureComponent {
  */
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   comments: getComments(state),
+  isAuthorizationRequired: getAuthorizationStatus(state),
   nearestPlaces: getNearestPlaces(state, ownProps.place.id)
 });
 
@@ -192,6 +198,7 @@ PlaceProperty.propTypes = {
     comment: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
   })).isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
   loadComments: PropTypes.func.isRequired,
   nearestPlaces: PropTypes.arrayOf(PropTypes.shape({
     bedrooms: PropTypes.number.isRequired,

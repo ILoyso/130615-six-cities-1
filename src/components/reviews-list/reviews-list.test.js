@@ -19,6 +19,8 @@ it(`ReviewsList correctly renders`, () => {
   const reviewsList = renderer
     .create(<ReviewsList
       comments={commentMock}
+      id={5}
+      isAuthorizationRequired={true}
     />)
     .toJSON();
 

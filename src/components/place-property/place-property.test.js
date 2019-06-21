@@ -62,6 +62,7 @@ it(`PlaceProperty correctly renders`, () => {
     .create(<MemoryRouter>
       <PlaceProperty
         comments={commentMock}
+        isAuthorizationRequired={true}
         loadComments={jest.fn()}
         nearestPlaces={nearestPlaceMock}
         place={placeMock}
