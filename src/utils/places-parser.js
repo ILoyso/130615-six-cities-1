@@ -45,9 +45,12 @@ export default class PlacesParser {
   /**
    * Method for parse places
    * @param {Array} data
-   * @return {Array}
+   * @return {Array | Object}
    */
   static parsePlaces(data) {
+    if (!Array.isArray(data)) {
+      return PlacesParser.parsePlace(data);
+    }
     return data.map(PlacesParser.parsePlace);
   }
 }
