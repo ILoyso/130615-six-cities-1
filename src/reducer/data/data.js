@@ -52,6 +52,16 @@ const Operation = {
         dispatch(ActionCreator.loadPlaces(PlacesParser.parsePlaces(response.data)));
       });
   },
+
+  sendComments: (id, data) => (dispatch, _getState, api) => {
+    return api.post(`/comments/${id}`, data)
+      .then(() => {
+        dispatch(Operation.loadComments(id));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
 };
 
 
