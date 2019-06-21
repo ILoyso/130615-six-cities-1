@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 import {getRatingInPercent} from '../../utils/utils';
 
@@ -18,6 +19,8 @@ const ReviewItem = (props) => {
     date,
   } = commentItem;
 
+  const dateParsed = new Date(date);
+
   return <li className="reviews__item">
     <div className="reviews__user user">
       <div className="reviews__avatar-wrapper user__avatar-wrapper">
@@ -34,7 +37,7 @@ const ReviewItem = (props) => {
         </div>
       </div>
       <p className="reviews__text">{comment}</p>
-      <time className="reviews__time" dateTime="2019-04-24">April 2019 ????? {date}</time>
+      <time className="reviews__time" dateTime={moment(dateParsed).format(`YYYY-MM-DD`)}>{moment(dateParsed).format(`MMMM YYYY`)}</time>
     </div>
   </li>;
 };
