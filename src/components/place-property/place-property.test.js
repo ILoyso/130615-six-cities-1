@@ -1,6 +1,10 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import {MemoryRouter} from 'react-router-dom';
+import Enzyme, {shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import {shallowToJson} from 'enzyme-to-json';
+
+
+Enzyme.configure({adapter: new Adapter()});
 
 import {PlaceProperty} from './place-property.jsx';
 
@@ -17,6 +21,7 @@ const placeMock = {
   },
   id: 1,
   images: [`Img1`, `Img2`],
+  isFavorite: true,
   isPremium: true,
   maxAdults: 5,
   price: 200,
@@ -57,18 +62,17 @@ const commentMock = [{
   date: `date`,
 }];
 
-it(`PlaceProperty correctly renders`, () => {
-  const placeProperty = renderer
-    .create(<MemoryRouter>
-      <PlaceProperty
-        comments={commentMock}
-        isAuthorizationRequired={true}
-        loadComments={jest.fn()}
-        nearestPlaces={nearestPlaceMock}
-        place={placeMock}
-      />
-    </MemoryRouter>)
-    .toJSON();
+describe(`PlaceProperty Component`, () => {
+  it(`PlaceProperty correctly renders`, () => {
+    const placeProperty = shallow(<PlaceProperty
+      comments={commentMock}
+      isAuthorizationRequired={true}
+      loadComments={jest.fn()}
+      nearestPlaces={nearestPlaceMock}
+      place={placeMock}
+      setFavorite={jest.fn()}
+    />);
 
-  expect(placeProperty).toMatchSnapshot();
+    expect(shallowToJson(placeProperty)).toMatchSnapshot();
+  });
 });

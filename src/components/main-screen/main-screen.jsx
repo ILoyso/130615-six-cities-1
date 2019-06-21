@@ -118,6 +118,7 @@ MainScreen.propTypes = {
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
     id: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
