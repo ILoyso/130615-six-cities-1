@@ -37,6 +37,7 @@ class PlaceProperty extends React.PureComponent {
       isAuthorizationRequired,
       nearestPlaces,
       place,
+      setFavorite
     } = this.props;
 
     const {
@@ -47,6 +48,7 @@ class PlaceProperty extends React.PureComponent {
       host,
       id,
       images,
+      isFavorite,
       isPremium,
       maxAdults,
       price,
@@ -71,7 +73,11 @@ class PlaceProperty extends React.PureComponent {
             </div>}
             <div className="property__name-wrapper">
               <h1 className="property__name">{title}</h1>
-              <button className="property__bookmark-button button" type="button">
+              <button
+                className={`property__bookmark-button ${isFavorite && `property__bookmark-button--active`} button`}
+                onClick={() => setFavorite(place)}
+                type="button"
+              >
                 <svg className="property__bookmark-icon" width="31" height="33">
                   <use xlinkHref="#icon-bookmark"></use>
                 </svg>
@@ -184,6 +190,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
  */
 const mapDispatchToProps = (dispatch) => ({
   loadComments: (id) => dispatch(Operation.loadComments(id)),
+  setFavorite: (place) => dispatch(Operation.setFavorite(place))
 });
 
 
@@ -232,6 +239,7 @@ PlaceProperty.propTypes = {
     }).isRequired,
     id: PropTypes.number.isRequired,
     images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
     maxAdults: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
@@ -239,6 +247,7 @@ PlaceProperty.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,
+  setFavorite: PropTypes.func.isRequired,
 };
 
 

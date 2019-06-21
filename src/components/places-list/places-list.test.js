@@ -8,6 +8,7 @@ const placeMock = [
   {
     id: 1,
     img: `apartment-01.jpg`,
+    isFavorite: true,
     isPremium: true,
     price: 120,
     rating: 93,

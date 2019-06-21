@@ -2,13 +2,14 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {MemoryRouter} from 'react-router-dom';
 
-import PlaceCard from './place-card.jsx';
+import {PlaceCard} from './place-card.jsx';
 
 
 const placeMock = {
   info: {
     id: 1,
     img: `apartment-01.jpg`,
+    isFavorite: true,
     isPremium: true,
     price: 120,
     rating: 93,
@@ -17,7 +18,8 @@ const placeMock = {
   },
   onCardHover: jest.fn(),
   onCardImageClick: jest.fn(),
-  onTitleClick: jest.fn()
+  onTitleClick: jest.fn(),
+  setFavorite: jest.fn()
 };
 
 it(`Place card correctly renders`, () => {
@@ -28,6 +30,7 @@ it(`Place card correctly renders`, () => {
         onCardHover={placeMock.onCardHover}
         onCardImageClick={placeMock.onCardImageClick}
         onTitleClick={placeMock.onTitleClick}
+        setFavorite={placeMock.setFavorite}
       />
     </MemoryRouter>)
     .toJSON();
