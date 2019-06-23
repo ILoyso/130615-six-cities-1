@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Operation} from '../../reducer/user/user';
 import {compose} from 'recompose';
+
+import {Operation as UserOperation} from '../../reducer/user/user';
+import {Operation as DataOperation} from '../../reducer/data/data';
 
 
 /**
@@ -76,7 +78,8 @@ const withAuthorization = (Component) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  onLogIn: (data) => dispatch(Operation.logIn(data)),
+  loadPlaces: () => dispatch(DataOperation.loadPlaces()),
+  onLogIn: (data) => dispatch(UserOperation.logIn(data)),
 });
 
 

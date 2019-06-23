@@ -61,6 +61,28 @@ export const getCurrentPlaces = createSelector(
 
 
 /**
+ * Function for get all favorite places (sort by isFavorite)
+ * @param {Object} state
+ * @return {Array}
+ */
+export const getFavoritePlaces = createSelector(
+    getPlaces,
+    (places) => places.filter((place) => place.isFavorite)
+);
+
+
+/**
+ * Function for get all cities where user has favorite places
+ * @param {Object} state
+ * @return {Array}
+ */
+export const getFavoriteCities = createSelector(
+    getFavoritePlaces,
+    (places) => new Set(places.map((place) => place.city))
+);
+
+
+/**
  * Function for find three nearest places
  * @param {Object} state
  * @param {Number} id

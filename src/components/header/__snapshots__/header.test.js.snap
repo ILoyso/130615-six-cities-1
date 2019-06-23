@@ -79,7 +79,7 @@ Array [
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="/"
+                href="/favorites"
                 onClick={[Function]}
               >
                 <div

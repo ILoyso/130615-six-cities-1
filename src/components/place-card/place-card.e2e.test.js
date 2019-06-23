@@ -57,7 +57,7 @@ describe(`PlaceCard Component`, () => {
     />);
 
     const button = placeCard.find(`.place-card__bookmark-button`);
-    button.simulate(`click`, );
+    button.simulate(`click`);
 
     expect(setFavorite).toHaveBeenCalledTimes(1);
   });
