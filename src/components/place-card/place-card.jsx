@@ -15,6 +15,7 @@ import {Operation} from '../../reducer/data/data';
 const PlaceCard = (props) => {
   const {
     classCard,
+    classCardInfo,
     classMain,
     info,
     onCardImageClick,
@@ -39,12 +40,15 @@ const PlaceCard = (props) => {
     <div className={`${classMain}__image-wrapper place-card__image-wrapper`}>
       <a href="#" onClick={(evt) => {
         evt.preventDefault();
-        onCardImageClick(info);
+
+        if (onCardImageClick) {
+          onCardImageClick(info);
+        }
       }}>
         <img className="place-card__image" src={img} width="260" height="200" alt="Place image" />
       </a>
     </div>
-    <div className="place-card__info">
+    <div className={`place-card__info ${classCardInfo}`}>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{price}</b>
@@ -87,6 +91,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 PlaceCard.propTypes = {
   classCard: PropTypes.string,
+  classCardInfo: PropTypes.string,
   classMain: PropTypes.string,
   info: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -98,7 +103,7 @@ PlaceCard.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,
-  onCardImageClick: PropTypes.func.isRequired,
+  onCardImageClick: PropTypes.func,
   setFavorite: PropTypes.func.isRequired,
 };
 

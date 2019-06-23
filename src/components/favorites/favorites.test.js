@@ -1,13 +1,37 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import Enzyme, {shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import {shallowToJson} from 'enzyme-to-json';
 
-import Favorites from './favorites.jsx';
+Enzyme.configure({adapter: new Adapter()});
+
+import {Favorites} from './favorites.jsx';
 
 
-it(`Favorites correctly renders`, () => {
-  const favorites = renderer
-    .create(<Favorites />)
-    .toJSON();
+const placeMock = [
+  {
+    city: `Amsterdam`,
+    coordinates: [100, 100],
+    id: 1,
+    img: `apartment-01.jpg`,
+    isFavorite: true,
+    isPremium: true,
+    price: 120,
+    rating: 93,
+    title: `Beautiful & luxurious apartment at great location`,
+    type: `apartment`
+  }
+];
 
-  expect(favorites).toMatchSnapshot();
+const citiesMock = new Set([`Amsterdam`]);
+
+describe(`Favorites Component`, () => {
+  it(`Favorites correctly renders`, () => {
+    const favorites = shallow(<Favorites
+      cities={citiesMock}
+      places={placeMock}
+    />);
+
+    expect(shallowToJson(favorites)).toMatchSnapshot();
+  });
 });

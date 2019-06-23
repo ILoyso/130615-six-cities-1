@@ -15,6 +15,7 @@ const PlacesList = (props) => {
   let mainClass = classHelper || null;
   let listClass = null;
   let cardClass = null;
+  let cardInfo = null;
 
   switch (classHelper) {
     case `cities`: {
@@ -29,6 +30,13 @@ const PlacesList = (props) => {
       break;
     }
 
+    case `favorites`: {
+      listClass = `favorites__places`;
+      cardClass = `favorites__card`;
+      cardInfo = `favorites__card-info`;
+      break;
+    }
+
     default: {
       return null;
     }
@@ -37,6 +45,7 @@ const PlacesList = (props) => {
   return <div className={`${listClass} places__list tabs__content`}>
     {places.map((place, index) => <PlaceCard
       classCard={cardClass}
+      classCardInfo={cardInfo}
       classMain={mainClass}
       info={place}
       key={index}
@@ -58,7 +67,7 @@ PlacesList.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   })).isRequired,
-  setActiveItem: PropTypes.func.isRequired
+  setActiveItem: PropTypes.func
 };
 
 
