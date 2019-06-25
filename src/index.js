@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Router} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 
+import history from './utils/history';
 import reducer from './reducer/reducer';
 import {createAPI} from './api';
 import {Operation as DataOperation} from './reducer/data/data';
@@ -32,7 +34,9 @@ const init = () => {
 
   // React render for App component
   ReactDOM.render(<Provider store={store}>
-    <App />
+    <Router history={history}>
+      <App />
+    </Router>
   </Provider>,
   document.querySelector(`#root`)
   );

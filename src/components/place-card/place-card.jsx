@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
+import history from '../../utils/history';
+import {ROUTES} from '../../constants/routes';
 import {getRatingInPercent} from '../../utils/utils';
 import {Operation} from '../../reducer/data/data';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 
 /**
@@ -18,6 +21,7 @@ const PlaceCard = (props) => {
     classCardInfo,
     classMain,
     info,
+    isAuthorizationRequired,
     onCardImageClick,
     setFavorite
   } = props;
@@ -56,7 +60,13 @@ const PlaceCard = (props) => {
         </div>
         <button
           className={`place-card__bookmark-button ${isFavorite && `place-card__bookmark-button--active`} button`}
-          onClick={() => setFavorite(info)}
+          onClick={() => {
+            if (isAuthorizationRequired) {
+              history.push(ROUTES.LOGIN);
+            } else {
+              setFavorite(info);
+            }
+          }}
           type="button">
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
@@ -71,12 +81,23 @@ const PlaceCard = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <Link to={`/offer/${id}`}>{title}</Link>
+        <Link to={`${ROUTES.OFFER}/${id}`}>{title}</Link>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>
   </article>;
 };
+
+
+/**
+ * Function for connect state with current component
+ * @param {Object} state
+ * @param {Object} ownProps
+ * @return {Object}
+ */
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  isAuthorizationRequired: getAuthorizationStatus(state),
+});
 
 
 /**
@@ -103,6 +124,7 @@ PlaceCard.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
   onCardImageClick: PropTypes.func,
   setFavorite: PropTypes.func.isRequired,
 };
@@ -110,4 +132,4 @@ PlaceCard.propTypes = {
 
 export {PlaceCard};
 
-export default connect(null, mapDispatchToProps)(PlaceCard);
+export default connect(mapStateToProps, mapDispatchToProps)(PlaceCard);
