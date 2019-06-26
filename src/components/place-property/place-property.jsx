@@ -97,7 +97,7 @@ class PlaceProperty extends React.PureComponent {
                 <span style={{width: `${getRatingInPercent(rating)}%`}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
-              <span className="property__rating-value rating__value">{rating}</span>
+              <span className="property__rating-value rating__value">{Math.round(rating)}</span>
             </div>
             <ul className="property__features">
               <li className="property__feature property__feature--entire">
