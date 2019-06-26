@@ -5,7 +5,7 @@ import ReviewItem from '../review-item/review-item.jsx';
 import ReviewForm from '../review-form/review-form.jsx';
 
 import withSendComments from '../../hocs/with-send-comments/with-send-comments';
-
+import {sortByDate} from '../../utils/utils';
 
 const ReviewFormWrapped = withSendComments(ReviewForm);
 
@@ -25,10 +25,14 @@ const ReviewsList = (props) => {
   return <section className="property__reviews reviews">
     <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
     <ul className="reviews__list">
-      {comments.map((comment, index) => <ReviewItem
-        commentItem={comment}
-        key={index}
-      />)}
+      {comments.sort((first, second) => {
+        return new Date(second.date).getTime() - new Date(first.date).getTime();
+      }).slice(0, 10).map((comment, index) => {
+        return <ReviewItem
+          commentItem={comment}
+          key={index}
+        />;
+      })}
     </ul>
     {isAuthorizationRequired || <ReviewFormWrapped
       id={id}

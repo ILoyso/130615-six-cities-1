@@ -12,6 +12,7 @@ const ReviewForm = (props) => {
   const {
     onChange,
     onSendComment,
+    rating,
     review,
   } = props;
 
@@ -37,6 +38,7 @@ const ReviewForm = (props) => {
     <textarea
       className="reviews__textarea form__textarea"
       id="review"
+      maxLength={300}
       name="review"
       onChange={onChange}
       placeholder="Tell how was your stay, what you like and what can be improved"
@@ -49,7 +51,7 @@ const ReviewForm = (props) => {
       </p>
       <button
         className="reviews__submit form__submit button"
-        disabled=""
+        disabled={parseInt(rating, 10) ? false : `disabled`}
         onClick={onSendComment}
         type="submit"
       >
