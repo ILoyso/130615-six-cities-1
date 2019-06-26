@@ -1,5 +1,4 @@
-const MAX_RATING = 5;
-const MAX_RATING_PERCENT = 100;
+const STAR_PERSENT = 20;
 
 /**
  * Function for convert rating to percent
@@ -7,7 +6,7 @@ const MAX_RATING_PERCENT = 100;
  * @return {number}
  */
 export const getRatingInPercent = (rating) => {
-  return (rating * MAX_RATING_PERCENT) / MAX_RATING;
+  return Math.round(rating) * STAR_PERSENT;
 };
 
 
