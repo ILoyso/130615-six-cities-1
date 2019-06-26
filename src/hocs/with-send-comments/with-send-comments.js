@@ -30,6 +30,7 @@ const withSendComments = (Component) => {
     render() {
       return <Component
         {...this.props}
+        disabled={!(parseInt(this.state.rating, 10) > 0)}
         onChange={this._onChange}
         onSendComment={this._sendComment}
         rating={this.state.rating}
@@ -64,6 +65,7 @@ const withSendComments = (Component) => {
       });
 
       this.setState(Object.assign({}, this.state, {
+        rating: ``,
         review: ``
       }));
     }

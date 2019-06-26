@@ -10,17 +10,20 @@ import {RATING} from '../../constants/rating';
  */
 const ReviewForm = (props) => {
   const {
+    disabled,
     onChange,
     onSendComment,
     rating,
     review,
   } = props;
 
+
   return <form className="reviews__form form" action="#" method="post">
     <label className="reviews__label form__label" htmlFor="review">Your review</label>
     <div className="reviews__rating-form form__rating">
       {RATING.map((item, index) => <React.Fragment key={index}>
         <input
+          checked={parseInt(rating, 10) === item.value ? `checked` : ``}
           className="form__rating-input visually-hidden"
           id={`${item.value}-stars`}
           name="rating"
@@ -51,7 +54,7 @@ const ReviewForm = (props) => {
       </p>
       <button
         className="reviews__submit form__submit button"
-        disabled={parseInt(rating, 10) ? false : `disabled`}
+        disabled={disabled ? `disabled` : ``}
         onClick={onSendComment}
         type="submit"
       >
@@ -63,6 +66,7 @@ const ReviewForm = (props) => {
 
 
 ReviewForm.propTypes = {
+  disabled: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   onSendComment: PropTypes.func.isRequired,

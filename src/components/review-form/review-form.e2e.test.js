@@ -13,6 +13,7 @@ describe(`ReviewForm Component`, () => {
     const onSendComment = jest.fn();
 
     const reviewForm = shallow(<ReviewForm
+      disabled={false}
       id={5}
       onChange={jest.fn()}
       onSendComment={onSendComment}
@@ -30,6 +31,7 @@ describe(`ReviewForm Component`, () => {
     const onChange = jest.fn();
 
     const reviewForm = shallow(<ReviewForm
+      disabled={false}
       id={5}
       onChange={onChange}
       onSendComment={jest.fn()}

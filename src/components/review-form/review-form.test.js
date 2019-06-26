@@ -7,6 +7,7 @@ import ReviewForm from './review-form.jsx';
 it(`ReviewForm correctly renders`, () => {
   const reviewForm = renderer
     .create(<ReviewForm
+      disabled={false}
       id={5}
       onChange={jest.fn()}
       onSendComment={jest.fn()}

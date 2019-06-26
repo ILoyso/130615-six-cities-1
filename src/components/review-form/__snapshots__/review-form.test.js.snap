@@ -134,6 +134,7 @@ exports[`ReviewForm correctly renders 1`] = `
   <textarea
     className="reviews__textarea form__textarea"
     id="review"
+    maxLength={300}
     name="review"
     onChange={[MockFunction]}
     placeholder="Tell how was your stay, what you like and what can be improved"
