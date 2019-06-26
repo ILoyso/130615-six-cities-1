@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+import history from '../../utils/history';
+import {ROUTES} from '../../constants/routes';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 import PlacesList from '../places-list/places-list.jsx';
 import PlacesMap from '../places-map/places-map.jsx';
@@ -75,7 +77,13 @@ class PlaceProperty extends React.PureComponent {
               <h1 className="property__name">{title}</h1>
               <button
                 className={`property__bookmark-button ${isFavorite && `property__bookmark-button--active`} button`}
-                onClick={() => setFavorite(place)}
+                onClick={() => {
+                  if (isAuthorizationRequired) {
+                    history.push(ROUTES.LOGIN);
+                  } else {
+                    setFavorite(place);
+                  }
+                }}
                 type="button"
               >
                 <svg className="property__bookmark-icon" width="31" height="33">

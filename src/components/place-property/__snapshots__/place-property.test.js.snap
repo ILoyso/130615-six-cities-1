@@ -86,7 +86,7 @@ exports[`PlaceProperty Component PlaceProperty correctly renders 1`] = `
             <span
               style={
                 Object {
-                  "width": "62%",
+                  "width": "60%",
                 }
               }
             />
