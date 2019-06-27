@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 
-import {Operation} from '../../reducer/data/data';
+import {ActionCreator, Operation} from '../../reducer/data/data';
+import {getCommentSendingStatus} from '../../reducer/data/selectors';
 
 
 /**
@@ -55,10 +56,13 @@ const withSendComments = (Component) => {
      * @private
      */
     _sendComment(evt) {
-      const {rating, review} = this.state;
-      const {id} = this.props;
-
       evt.preventDefault();
+
+      const {rating, review} = this.state;
+      const {changeCommentSendingStatus, id} = this.props;
+
+      changeCommentSendingStatus(true);
+
       this.props.onSendComment(id, {
         comment: review,
         rating: parseInt(rating, 10),
@@ -72,6 +76,7 @@ const withSendComments = (Component) => {
   }
 
   WithSendComments.propTypes = {
+    changeCommentSendingStatus: PropTypes.func.isRequired,
     id: PropTypes.number,
     onSendComment: PropTypes.func.isRequired,
   };
@@ -81,6 +86,8 @@ const withSendComments = (Component) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
+  changeCommentSendingStatus: (status) => dispatch(ActionCreator.changeCommentSendingStatus(status)),
+
   onSendComment: (id, data) => dispatch(Operation.sendComments(id, data)),
 });
 

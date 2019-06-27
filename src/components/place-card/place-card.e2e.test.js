@@ -30,6 +30,7 @@ describe(`PlaceCard Component`, () => {
 
     const placeCard = shallow(<PlaceCard
       info={info}
+      isAuthorizationRequired={false}
       onCardImageClick={onCardImageClick}
       onTitleClick={onTitleClick}
       setFavorite={setFavorite}
@@ -51,6 +52,7 @@ describe(`PlaceCard Component`, () => {
 
     const placeCard = shallow(<PlaceCard
       info={info}
+      isAuthorizationRequired={false}
       onCardImageClick={onCardImageClick}
       onTitleClick={onTitleClick}
       setFavorite={setFavorite}

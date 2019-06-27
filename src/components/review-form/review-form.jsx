@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import {RATING} from '../../constants/rating';
+import {getCommentSendingStatus, getCommentError} from '../../reducer/data/selectors';
+
 
 /**
  * Component for create comment
@@ -11,11 +14,15 @@ import {RATING} from '../../constants/rating';
 const ReviewForm = (props) => {
   const {
     disabled,
+    errorCommentsSend,
+    isCommentSending,
     onChange,
     onSendComment,
     rating,
     review,
   } = props;
+
+  const disabledStatus = isCommentSending ? `disabled` : ``;
 
 
   return <form className="reviews__form form" action="#" method="post">
@@ -25,6 +32,7 @@ const ReviewForm = (props) => {
         <input
           checked={parseInt(rating, 10) === item.value ? `checked` : ``}
           className="form__rating-input visually-hidden"
+          disabled={disabledStatus}
           id={`${item.value}-stars`}
           name="rating"
           onChange={onChange}
@@ -40,6 +48,7 @@ const ReviewForm = (props) => {
     </div>
     <textarea
       className="reviews__textarea form__textarea"
+      disabled={disabledStatus}
       id="review"
       maxLength={300}
       name="review"
@@ -54,20 +63,37 @@ const ReviewForm = (props) => {
       </p>
       <button
         className="reviews__submit form__submit button"
-        disabled={disabled ? `disabled` : ``}
+        disabled={disabled ? `disabled` : disabledStatus}
         onClick={onSendComment}
         type="submit"
       >
         Submit
       </button>
     </div>
+    {errorCommentsSend && <div style={{color: `red`, padding: `20px 0 0 0`}}>
+      Something goes wrong, please try again later. The error is: {errorCommentsSend}
+    </div>}
   </form>;
 };
 
 
+/**
+ * Function for connect state with current component
+ * @param {Object} state
+ * @param {Object} ownProps
+ * @return {Object}
+ */
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  errorCommentsSend: getCommentError(state),
+  isCommentSending: getCommentSendingStatus(state),
+});
+
+
 ReviewForm.propTypes = {
   disabled: PropTypes.bool.isRequired,
+  errorCommentsSend: PropTypes.string,
   id: PropTypes.number.isRequired,
+  isCommentSending: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onSendComment: PropTypes.func.isRequired,
   rating: PropTypes.string.isRequired,
@@ -75,4 +101,6 @@ ReviewForm.propTypes = {
 };
 
 
-export default ReviewForm;
+export {ReviewForm};
+
+export default connect(mapStateToProps)(ReviewForm);

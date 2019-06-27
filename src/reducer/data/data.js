@@ -5,15 +5,19 @@ import CommentsParser from '../../utils/comments-parser';
 const initialState = {
   city: `Amsterdam`,
   comments: [],
+  errorCommentsSend: null,
+  isCommentSending: false,
   places: []
 };
 
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
+  CHANGE_COMMENT_SENDING_STATUS: `CHANGE_COMMENT_SENDING_STATUS`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_PLACES: `LOAD_PLACES`,
   POST_COMMENT: `POST_COMMENT`,
+  SET_COMMENT_SEND_ERROR: `SET_COMMENT_SEND_ERROR`,
   UPDATE_PLACE: `UPDATE_PLACE`,
 };
 
@@ -26,6 +30,11 @@ const ActionCreator = {
   changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
     payload: city
+  }),
+
+  changeCommentSendingStatus: (status) => ({
+    type: ActionType.CHANGE_COMMENT_SENDING_STATUS,
+    payload: status
   }),
 
   loadComments: (comments) => ({
@@ -41,6 +50,11 @@ const ActionCreator = {
   postComment: (comments) => ({
     type: ActionType.POST_COMMENT,
     payload: comments,
+  }),
+
+  setCommentSendError: (error) => ({
+    type: ActionType.SET_COMMENT_SEND_ERROR,
+    payload: error
   }),
 
   updatePlace: (place) => ({
@@ -69,9 +83,11 @@ const Operation = {
     return api.post(`/comments/${id}`, data)
       .then((response) => {
         dispatch(ActionCreator.postComment(CommentsParser.parseComments(response.data)));
+        dispatch(ActionCreator.changeCommentSendingStatus(false));
       })
       .catch((err) => {
-        throw err;
+        const commentError = (err.response && err.response.data) || {};
+        dispatch(ActionCreator.setCommentSendError(commentError.error || err.message));
       });
   },
 
@@ -101,7 +117,12 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return Object.assign({}, state, {
-        city: action.payload
+        city: action.payload,
+      });
+
+    case ActionType.CHANGE_COMMENT_SENDING_STATUS:
+      return Object.assign({}, state, {
+        isCommentSending: action.payload,
       });
 
     case ActionType.LOAD_COMMENTS:
@@ -117,6 +138,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.POST_COMMENT:
       return Object.assign({}, state, {
         comments: action.payload,
+      });
+
+    case ActionType.SET_COMMENT_SEND_ERROR:
+      return Object.assign({}, state, {
+        errorCommentsSend: action.payload,
       });
 
     case ActionType.UPDATE_PLACE:

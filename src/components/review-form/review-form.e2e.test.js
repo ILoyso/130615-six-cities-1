@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import ReviewForm from './review-form.jsx';
+import {ReviewForm} from './review-form.jsx';
 
 
 Enzyme.configure({adapter: new Adapter()});
@@ -15,6 +15,7 @@ describe(`ReviewForm Component`, () => {
     const reviewForm = shallow(<ReviewForm
       disabled={false}
       id={5}
+      isCommentSending={false}
       onChange={jest.fn()}
       onSendComment={onSendComment}
       rating={`3`}
@@ -33,6 +34,7 @@ describe(`ReviewForm Component`, () => {
     const reviewForm = shallow(<ReviewForm
       disabled={false}
       id={5}
+      isCommentSending={false}
       onChange={onChange}
       onSendComment={jest.fn()}
       rating={`3`}

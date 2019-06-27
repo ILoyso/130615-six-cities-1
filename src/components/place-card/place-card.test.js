@@ -27,6 +27,7 @@ it(`Place card correctly renders`, () => {
     .create(<MemoryRouter>
       <PlaceCard
         info={placeMock.info}
+        isAuthorizationRequired={false}
         onCardHover={placeMock.onCardHover}
         onCardImageClick={placeMock.onCardImageClick}
         onTitleClick={placeMock.onTitleClick}

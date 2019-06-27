@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import ReviewForm from './review-form.jsx';
+import {ReviewForm} from './review-form.jsx';
 
 
 it(`ReviewForm correctly renders`, () => {
@@ -9,6 +9,7 @@ it(`ReviewForm correctly renders`, () => {
     .create(<ReviewForm
       disabled={false}
       id={5}
+      isCommentSending={false}
       onChange={jest.fn()}
       onSendComment={jest.fn()}
       rating={`3`}

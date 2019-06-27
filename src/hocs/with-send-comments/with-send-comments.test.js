@@ -15,6 +15,7 @@ const MockComponentWrapped = withSendComments(MockComponent);
 describe(`withSendComments`, () => {
   it(`Should change value when call onChange`, () => {
     const wrapper = shallow(<MockComponentWrapped
+      changeCommentSendingStatus={jest.fn()}
       onSendComment={jest.fn()}
     />);
 

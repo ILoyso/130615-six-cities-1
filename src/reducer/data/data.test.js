@@ -146,7 +146,7 @@ describe(`Operation work correctly`, () => {
 
     return sendComments(dispatch, jest.fn(), api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.POST_COMMENT,
           payload: CommentsParser.parseComments(mockResponse.data)
@@ -222,6 +222,8 @@ describe(`Reducer works correctly`, () => {
     expect(reducer(undefined, {})).toEqual({
       city: `Amsterdam`,
       comments: [],
+      errorCommentsSend: null,
+      isCommentSending: false,
       places: []
     });
   });
@@ -411,6 +413,28 @@ describe(`Reducer works correctly`, () => {
       ]
     });
   });
+
+  it(`Reducer should change comment sending status by a given value`, () => {
+    expect(reducer({
+      isCommentSending: false
+    }, {
+      type: ActionType.CHANGE_COMMENT_SENDING_STATUS,
+      payload: true,
+    })).toEqual({
+      isCommentSending: true
+    });
+  });
+
+  it(`Reducer should change comment send error by a given value`, () => {
+    expect(reducer({
+      errorCommentsSend: null
+    }, {
+      type: ActionType.SET_COMMENT_SEND_ERROR,
+      payload: `Test error`,
+    })).toEqual({
+      errorCommentsSend: `Test error`
+    });
+  });
 });
 
 describe(`Action creators work correctly`, () => {
@@ -526,6 +550,20 @@ describe(`Action creators work correctly`, () => {
         title: `Title`,
         type: `apartment`
       }
+    });
+  });
+
+  it(`Action creator for change comment sending status correctly change it`, () => {
+    expect(ActionCreator.changeCommentSendingStatus(true)).toEqual({
+      type: ActionType.CHANGE_COMMENT_SENDING_STATUS,
+      payload: true
+    });
+  });
+
+  it(`Action creator for change comment send error correctly change it`, () => {
+    expect(ActionCreator.setCommentSendError(`Test error`)).toEqual({
+      type: ActionType.SET_COMMENT_SEND_ERROR,
+      payload: `Test error`
     });
   });
 });

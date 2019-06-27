@@ -28,6 +28,26 @@ export const getComments = (state) => {
 
 
 /**
+ * Function for get comment sending status
+ * @param {Object} state
+ * @return {*}
+ */
+export const getCommentSendingStatus = (state) => {
+  return state[NAME_SPACE_DATA].isCommentSending;
+};
+
+
+/**
+ * Function for get comment error
+ * @param {Object} state
+ * @return {*}
+ */
+export const getCommentError = (state) => {
+  return state[NAME_SPACE_DATA].errorCommentsSend;
+};
+
+
+/**
  * Function for get all places
  * @param {Object} state
  * @return {Array}

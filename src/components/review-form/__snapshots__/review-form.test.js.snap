@@ -16,7 +16,9 @@ exports[`ReviewForm correctly renders 1`] = `
     className="reviews__rating-form form__rating"
   >
     <input
+      checked=""
       className="form__rating-input visually-hidden"
+      disabled=""
       id="5-stars"
       name="rating"
       onChange={[MockFunction]}
@@ -39,7 +41,9 @@ exports[`ReviewForm correctly renders 1`] = `
       </svg>
     </label>
     <input
+      checked=""
       className="form__rating-input visually-hidden"
+      disabled=""
       id="4-stars"
       name="rating"
       onChange={[MockFunction]}
@@ -62,7 +66,9 @@ exports[`ReviewForm correctly renders 1`] = `
       </svg>
     </label>
     <input
+      checked="checked"
       className="form__rating-input visually-hidden"
+      disabled=""
       id="3-stars"
       name="rating"
       onChange={[MockFunction]}
@@ -85,7 +91,9 @@ exports[`ReviewForm correctly renders 1`] = `
       </svg>
     </label>
     <input
+      checked=""
       className="form__rating-input visually-hidden"
+      disabled=""
       id="2-stars"
       name="rating"
       onChange={[MockFunction]}
@@ -108,7 +116,9 @@ exports[`ReviewForm correctly renders 1`] = `
       </svg>
     </label>
     <input
+      checked=""
       className="form__rating-input visually-hidden"
+      disabled=""
       id="1-stars"
       name="rating"
       onChange={[MockFunction]}
@@ -133,6 +143,7 @@ exports[`ReviewForm correctly renders 1`] = `
   </div>
   <textarea
     className="reviews__textarea form__textarea"
+    disabled=""
     id="review"
     maxLength={300}
     name="review"
