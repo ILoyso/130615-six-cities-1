@@ -77,18 +77,6 @@ const ReviewForm = (props) => {
 };
 
 
-/**
- * Function for connect state with current component
- * @param {Object} state
- * @param {Object} ownProps
- * @return {Object}
- */
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  errorCommentsSend: getCommentError(state),
-  isCommentSending: getCommentSendingStatus(state),
-});
-
-
 ReviewForm.propTypes = {
   disabled: PropTypes.bool.isRequired,
   errorCommentsSend: PropTypes.string,
@@ -99,6 +87,18 @@ ReviewForm.propTypes = {
   rating: PropTypes.string.isRequired,
   review: PropTypes.string.isRequired,
 };
+
+
+/**
+ * Function for connect state with current component
+ * @param {Object} state
+ * @param {Object} ownProps
+ * @return {Object}
+ */
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  errorCommentsSend: getCommentError(state),
+  isCommentSending: getCommentSendingStatus(state),
+});
 
 
 export {ReviewForm};

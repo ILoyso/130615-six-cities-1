@@ -62,6 +62,12 @@ const Header = (props) => {
 };
 
 
+Header.propTypes = {
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired
+};
+
+
 /**
  * Function for connect state with current component
  * @param {Object} state
@@ -72,12 +78,6 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   isAuthorizationRequired: getAuthorizationStatus(state),
   user: getUser(state)
 });
-
-
-Header.propTypes = {
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired
-};
 
 
 export {Header};

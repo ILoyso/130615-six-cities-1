@@ -178,30 +178,6 @@ class PlaceProperty extends React.PureComponent {
 }
 
 
-/**
- * Function for connect state with current component
- * @param {Object} state
- * @param {Object} ownProps
- * @return {Object}
- */
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  comments: getComments(state),
-  isAuthorizationRequired: getAuthorizationStatus(state),
-  nearestPlaces: getNearestPlaces(state, ownProps.place.id)
-});
-
-
-/**
- * Function for connect action creator methods with current component
- * @param {Function} dispatch
- * @return {Object}
- */
-const mapDispatchToProps = (dispatch) => ({
-  loadComments: (id) => dispatch(Operation.loadComments(id)),
-  setFavorite: (place) => dispatch(Operation.setFavorite(place))
-});
-
-
 PlaceProperty.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.shape({
     user: PropTypes.shape({
@@ -257,6 +233,30 @@ PlaceProperty.propTypes = {
   }).isRequired,
   setFavorite: PropTypes.func.isRequired,
 };
+
+
+/**
+ * Function for connect state with current component
+ * @param {Object} state
+ * @param {Object} ownProps
+ * @return {Object}
+ */
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  comments: getComments(state),
+  isAuthorizationRequired: getAuthorizationStatus(state),
+  nearestPlaces: getNearestPlaces(state, ownProps.place.id)
+});
+
+
+/**
+ * Function for connect action creator methods with current component
+ * @param {Function} dispatch
+ * @return {Object}
+ */
+const mapDispatchToProps = (dispatch) => ({
+  loadComments: (id) => dispatch(Operation.loadComments(id)),
+  setFavorite: (place) => dispatch(Operation.setFavorite(place))
+});
 
 
 export {PlaceProperty};

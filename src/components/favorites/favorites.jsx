@@ -49,18 +49,6 @@ const Favorites = (props) => {
 };
 
 
-/**
- * Function for connect state with current component
- * @param {Object} state
- * @param {Object} ownProps
- * @return {Object}
- */
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  cities: getFavoriteCities(state),
-  places: getFavoritePlaces(state),
-});
-
-
 Favorites.propTypes = {
   cities: PropTypes.instanceOf(Set).isRequired,
   places: PropTypes.arrayOf(PropTypes.shape({
@@ -76,6 +64,18 @@ Favorites.propTypes = {
     type: PropTypes.string.isRequired,
   })).isRequired,
 };
+
+
+/**
+ * Function for connect state with current component
+ * @param {Object} state
+ * @param {Object} ownProps
+ * @return {Object}
+ */
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  cities: getFavoriteCities(state),
+  places: getFavoritePlaces(state),
+});
 
 
 export {Favorites};

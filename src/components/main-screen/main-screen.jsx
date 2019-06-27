@@ -75,30 +75,6 @@ const MainScreen = (props) => {
 };
 
 
-/**
- * Function for connect state with current component
- * @param {Object} state
- * @param {Object} ownProps
- * @return {Object}
- */
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  city: getCity(state),
-  cities: getCities(state),
-});
-
-
-/**
- * Function for connect action creator methods with current component
- * @param {Function} dispatch
- * @return {Object}
- */
-const mapDispatchToProps = (dispatch) => ({
-  changeCity: (city) => {
-    dispatch(ActionCreator.changeCity(city));
-  },
-});
-
-
 MainScreen.propTypes = {
   activeItem: PropTypes.object,
   activeOption: PropTypes.shape({
@@ -126,6 +102,30 @@ MainScreen.propTypes = {
     type: PropTypes.string.isRequired,
   })).isRequired,
 };
+
+
+/**
+ * Function for connect state with current component
+ * @param {Object} state
+ * @param {Object} ownProps
+ * @return {Object}
+ */
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  city: getCity(state),
+  cities: getCities(state),
+});
+
+
+/**
+ * Function for connect action creator methods with current component
+ * @param {Function} dispatch
+ * @return {Object}
+ */
+const mapDispatchToProps = (dispatch) => ({
+  changeCity: (city) => {
+    dispatch(ActionCreator.changeCity(city));
+  },
+});
 
 
 export {MainScreen};

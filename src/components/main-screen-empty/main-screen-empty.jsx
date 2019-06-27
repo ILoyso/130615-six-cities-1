@@ -45,6 +45,14 @@ const MainScreenEmpty = (props) => {
 };
 
 
+MainScreenEmpty.propTypes = {
+  changeCity: PropTypes.func.isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  city: PropTypes.string.isRequired,
+  onChangeSorting: PropTypes.func.isRequired,
+};
+
+
 /**
  * Function for connect state with current component
  * @param {Object} state
@@ -67,14 +75,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeCity(city));
   },
 });
-
-
-MainScreenEmpty.propTypes = {
-  changeCity: PropTypes.func.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  city: PropTypes.string.isRequired,
-  onChangeSorting: PropTypes.func.isRequired,
-};
 
 
 export {MainScreenEmpty};

@@ -51,6 +51,14 @@ const App = (props) => {
   </>;
 };
 
+
+App.propTypes = {
+  places: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  })).isRequired
+};
+
+
 /**
  * Function for connect state with current component
  * @param {Object} state
@@ -60,13 +68,6 @@ const App = (props) => {
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   places: getCurrentPlaces(state),
 });
-
-
-App.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-  })).isRequired
-};
 
 
 export {App};

@@ -89,6 +89,26 @@ const PlaceCard = (props) => {
 };
 
 
+PlaceCard.propTypes = {
+  classCard: PropTypes.string,
+  classCardInfo: PropTypes.string,
+  classMain: PropTypes.string,
+  info: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  onCardImageClick: PropTypes.func,
+  setFavorite: PropTypes.func.isRequired,
+};
+
+
 /**
  * Function for connect state with current component
  * @param {Object} state
@@ -108,26 +128,6 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 const mapDispatchToProps = (dispatch) => ({
   setFavorite: (place) => dispatch(Operation.setFavorite(place))
 });
-
-
-PlaceCard.propTypes = {
-  classCard: PropTypes.string,
-  classCardInfo: PropTypes.string,
-  classMain: PropTypes.string,
-  info: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-  }).isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  onCardImageClick: PropTypes.func,
-  setFavorite: PropTypes.func.isRequired,
-};
 
 
 export {PlaceCard};
