@@ -38,18 +38,16 @@ const ActionCreator = {
 
 
 const Operation = {
-  checkAuth: () => {
-    return (dispatch, _getState, api) => {
-      return api.get(`/login`)
-        .then((response) => {
-          if (response && response.status === 200) {
-            dispatch(ActionCreator.logIn(response.data));
-          }
-        })
-        .catch((err) => {
-          throw err;
-        });
-    };
+  checkAuth: () => (dispatch, _getState, api) => {
+    return api.get(`/login`)
+      .then((response) => {
+        if (response && response.status === 200) {
+          dispatch(ActionCreator.logIn(response.data));
+        }
+      })
+      .catch((err) => {
+        throw err;
+      });
   },
 
   logIn: (data) => (dispatch, _getState, api) => {
