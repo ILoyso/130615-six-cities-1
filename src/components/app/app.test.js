@@ -10,7 +10,11 @@ import {App} from './app.jsx';
 describe(`App Component`, () => {
   it(`App correctly renders`, () => {
     const app = shallow(<App
-      places={[
+      allPlaces={[
+        {id: 1},
+        {id: 2}
+      ]}
+      currentPlaces={[
         {id: 1},
         {id: 2}
       ]}

@@ -109,7 +109,7 @@ export const getFavoriteCities = createSelector(
  * @return {*}
  */
 export const getNearestPlaces = (state, id) => {
-  const allPlaces = getCurrentPlaces(state);
+  const allPlaces = getPlaces(state);
   const currentPlace = allPlaces.find((place) => place.id === id);
 
   return allPlaces.sort((a, b) => {

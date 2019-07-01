@@ -15,7 +15,7 @@ import withSorting from '../../hocs/with-sorting/with-sorting';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import withAuthorization from '../../hocs/with-authorization/with-authorization';
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
-import {getCurrentPlaces} from '../../reducer/data/selectors';
+import {getCurrentPlaces, getPlaces} from '../../reducer/data/selectors';
 
 
 const MainScreenWrapped = withActiveItem(withSorting(MainScreen));
@@ -30,13 +30,16 @@ const FavoritesWrapped = withPrivateRoute(Favorites);
  * @return {*}
  */
 const App = (props) => {
-  const {places} = props;
+  const {
+    allPlaces,
+    currentPlaces
+  } = props;
 
   return <>
     <Header />
     <Switch>
       <Route exact path={Routes.HOME} render={() => {
-        if (places.length === 0) {
+        if (currentPlaces.length === 0) {
           return <MainScreenEmptyWrapped />;
         }
         return <MainScreenWrapped />;
@@ -44,7 +47,7 @@ const App = (props) => {
       <Route path={Routes.LOGIN} render={() => <SignInWrapped />}></Route>
       <Route path={Routes.FAVORITES} render={() => <FavoritesWrapped />} />
 
-      {places.map((place, index) => <Route path={`${Routes.OFFER}/${place.id}`} render={() => <PlaceProperty
+      {allPlaces.map((place, index) => <Route path={`${Routes.OFFER}/${place.id}`} render={() => <PlaceProperty
         place={place}
       />} key={index}/>)}
     </Switch>
@@ -53,7 +56,10 @@ const App = (props) => {
 
 
 App.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.shape({
+  allPlaces: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  })).isRequired,
+  currentPlaces: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
   })).isRequired
 };
@@ -66,7 +72,8 @@ App.propTypes = {
  * @return {Object}
  */
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  places: getCurrentPlaces(state),
+  allPlaces: getPlaces(state),
+  currentPlaces: getCurrentPlaces(state),
 });
 
 
