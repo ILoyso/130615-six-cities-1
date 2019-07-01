@@ -1,4 +1,4 @@
-const STAR_PERSENT = 20;
+const STAR_PERCENT = 20;
 
 /**
  * Function for convert rating to percent
@@ -6,7 +6,7 @@ const STAR_PERSENT = 20;
  * @return {number}
  */
 export const getRatingInPercent = (rating) => {
-  return Math.round(rating) * STAR_PERSENT;
+  return Math.round(rating) * STAR_PERCENT;
 };
 
 
