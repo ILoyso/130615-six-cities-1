@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {compose} from 'recompose';
 
 import {ActionCreator, Operation} from '../../reducer/data/data';
-import {getCommentSendingStatus} from '../../reducer/data/selectors';
 
 
 /**

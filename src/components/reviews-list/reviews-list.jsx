@@ -5,7 +5,6 @@ import ReviewItem from '../review-item/review-item.jsx';
 import ReviewForm from '../review-form/review-form.jsx';
 
 import withSendComments from '../../hocs/with-send-comments/with-send-comments';
-import {sortByDate} from '../../utils/utils';
 
 const ReviewFormWrapped = withSendComments(ReviewForm);
 
