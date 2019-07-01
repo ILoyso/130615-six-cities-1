@@ -22,14 +22,6 @@ const PlacesListWrapped = withActiveItem(PlacesList);
 class PlaceProperty extends React.PureComponent {
 
   /**
-   * Create PlaceProperty component
-   * @param {Object} props
-   */
-  constructor(props) {
-    super(props);
-  }
-
-  /**
    * Method for render component
    * @return {*}
    */

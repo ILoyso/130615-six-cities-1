@@ -6,6 +6,8 @@ import {calcDistance} from '../../utils/utils';
 
 const NAME_SPACE_DATA = NameSpace.DATA;
 
+const getState = (state) => state[NAME_SPACE_DATA];
+
 
 /**
  * Function for get city
@@ -13,7 +15,7 @@ const NAME_SPACE_DATA = NameSpace.DATA;
  * @return {*}
  */
 export const getCity = (state) => {
-  return state[NAME_SPACE_DATA].city;
+  return getState(state).city;
 };
 
 
@@ -23,7 +25,7 @@ export const getCity = (state) => {
  * @return {*}
  */
 export const getComments = (state) => {
-  return state[NAME_SPACE_DATA].comments;
+  return getState(state).comments;
 };
 
 
@@ -33,7 +35,7 @@ export const getComments = (state) => {
  * @return {*}
  */
 export const getCommentSendingStatus = (state) => {
-  return state[NAME_SPACE_DATA].isCommentSending;
+  return getState(state).isCommentSending;
 };
 
 
@@ -43,7 +45,7 @@ export const getCommentSendingStatus = (state) => {
  * @return {*}
  */
 export const getCommentError = (state) => {
-  return state[NAME_SPACE_DATA].errorCommentsSend;
+  return getState(state).errorCommentsSend;
 };
 
 
@@ -53,7 +55,7 @@ export const getCommentError = (state) => {
  * @return {Array}
  */
 export const getPlaces = (state) => {
-  return state[NAME_SPACE_DATA].places;
+  return getState(state).places;
 };
 
 

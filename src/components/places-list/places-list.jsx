@@ -13,9 +13,9 @@ const PlacesList = (props) => {
   } = props;
 
   let mainClass = classHelper || null;
-  let listClass = null;
-  let cardClass = null;
-  let cardInfo = null;
+  let listClass = ``;
+  let cardClass = ``;
+  let cardInfo = ``;
 
   switch (classHelper) {
     case `cities`: {
@@ -38,7 +38,7 @@ const PlacesList = (props) => {
     }
 
     default: {
-      return null;
+      return ``;
     }
   }
 

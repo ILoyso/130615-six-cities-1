@@ -45,20 +45,6 @@ describe(`withSorting`, () => {
     expect(component.state().sortingPlaces).toEqual(placesMock);
   });
 
-  it(`Sorting without parameter correctly works`, () => {
-    const component = shallow(<MockComponentWrapped
-      places={placesMock}
-    />);
-
-    expect(component.state().activeOption.id).toEqual(`popular`);
-
-    component.props().onChangeSorting();
-
-    expect(component.state().activeOption.id).toEqual(`popular`);
-    expect(component.state().options).toEqual(SORTING_OPTIONS);
-    expect(component.state().sortingPlaces).toEqual(placesMock);
-  });
-
   it(`Sorting from low to hide correctly works`, () => {
     const component = shallow(<MockComponentWrapped
       places={placesMock}

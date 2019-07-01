@@ -33,9 +33,9 @@ const withOpening = (Component) => {
      * @private
      */
     _onClick() {
-      this.setState(Object.assign({}, this.state, {
+      this.setState({
         isOpen: !this.state.isOpen
-      }));
+      });
     }
   }
 

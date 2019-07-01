@@ -8,7 +8,7 @@ import {Routes} from '../../constants/routes';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 
-const withPrivateRoute = (Component, anotherPath = undefined) => {
+const withPrivateRoute = (Component, anotherPath) => {
   const WithPrivateRoute = (props) => {
     const {isAuthorizationRequired} = props;
 

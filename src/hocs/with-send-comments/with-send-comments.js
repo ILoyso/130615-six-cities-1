@@ -44,9 +44,9 @@ const withSendComments = (Component) => {
      * @private
      */
     _onChange(evt) {
-      this.setState(Object.assign({}, this.state, {
+      this.setState({
         [evt.target.name]: evt.target.value
-      }));
+      });
     }
 
     /**
@@ -67,10 +67,10 @@ const withSendComments = (Component) => {
         rating: parseInt(rating, 10),
       });
 
-      this.setState(Object.assign({}, this.state, {
+      this.setState({
         rating: ``,
         review: ``
-      }));
+      });
     }
   }
 

@@ -45,9 +45,11 @@ const withSorting = (Component) => {
      * Updated sortingPLaces when places was loaded
      */
     componentDidUpdate() {
-      this.setState(Object.assign({}, this.state, {
-        sortingPlaces: this.state.activeOption.id === `popular` ? this.props.places : this.state.sortingPlaces
-      }));
+      if (this.state.activeOption.id === `popular`) {
+        this.setState({
+          sortingPlaces: this.props.places
+        });
+      }
     }
 
     /**
@@ -58,10 +60,10 @@ const withSorting = (Component) => {
     _onChangeSorting(id = `popular`) {
       const filteredPlaces = this._filterPlaces(id);
 
-      this.setState(Object.assign({}, this.state, {
+      this.setState({
         activeOption: this.state.options.find((option) => option.id === id),
         sortingPlaces: filteredPlaces
-      }));
+      });
     }
 
     /**
