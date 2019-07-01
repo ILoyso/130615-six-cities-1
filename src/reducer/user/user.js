@@ -42,9 +42,12 @@ const Operation = {
     return (dispatch, _getState, api) => {
       return api.get(`/login`)
         .then((response) => {
-          if (response.status === 200) {
+          if (response && response.status === 200) {
             dispatch(ActionCreator.logIn(response.data));
           }
+        })
+        .catch((err) => {
+          throw err;
         });
     };
   },
