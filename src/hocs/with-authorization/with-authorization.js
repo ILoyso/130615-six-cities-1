@@ -21,8 +21,8 @@ const withAuthorization = (Component) => {
 
       this.state = {
         user: {
-          email: `test@test.com`,
-          password: `password`
+          email: ``,
+          password: ``
         }
       };
 
