@@ -1,4 +1,4 @@
-export const ROUTES = {
+export const Routes = {
   ERROR: `/error`,
   FAVORITES: `/favorites`,
   HOME: `/`,

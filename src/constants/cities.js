@@ -1,4 +1,4 @@
-export const CITIES_DATA = {
+export const CitiesData = {
   Amsterdam: [52.38333, 4.9],
   Brussels: [50.85045, 4.34878],
   Cologne: [50.930779, 6.938399],

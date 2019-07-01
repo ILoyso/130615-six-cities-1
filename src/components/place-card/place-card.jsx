@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import history from '../../utils/history';
-import {ROUTES} from '../../constants/routes';
+import {Routes} from '../../constants/routes';
 import {getRatingInPercent} from '../../utils/utils';
 import {Operation} from '../../reducer/data/data';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
@@ -62,7 +62,7 @@ const PlaceCard = (props) => {
           className={`place-card__bookmark-button ${isFavorite && `place-card__bookmark-button--active`} button`}
           onClick={() => {
             if (isAuthorizationRequired) {
-              history.push(ROUTES.LOGIN);
+              history.push(Routes.LOGIN);
             } else {
               setFavorite(info);
             }
@@ -81,7 +81,7 @@ const PlaceCard = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <Link to={`${ROUTES.OFFER}/${id}`}>{title}</Link>
+        <Link to={`${Routes.OFFER}/${id}`}>{title}</Link>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>

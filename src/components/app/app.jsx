@@ -3,7 +3,7 @@ import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {ROUTES} from '../../constants/routes';
+import {Routes} from '../../constants/routes';
 import Header from '../header/header.jsx';
 import MainScreen from '../main-screen/main-screen.jsx';
 import MainScreenEmpty from '../main-screen-empty/main-screen-empty.jsx';
@@ -20,7 +20,7 @@ import {getCurrentPlaces} from '../../reducer/data/selectors';
 
 const MainScreenWrapped = withActiveItem(withSorting(MainScreen));
 const MainScreenEmptyWrapped = withActiveItem(withSorting(MainScreenEmpty));
-const SignInWrapped = withPrivateRoute(withAuthorization(SignIn), ROUTES.HOME);
+const SignInWrapped = withPrivateRoute(withAuthorization(SignIn), Routes.HOME);
 const FavoritesWrapped = withPrivateRoute(Favorites);
 
 
@@ -35,16 +35,16 @@ const App = (props) => {
   return <>
     <Header />
     <Switch>
-      <Route exact path={ROUTES.HOME} render={() => {
+      <Route exact path={Routes.HOME} render={() => {
         if (places.length === 0) {
           return <MainScreenEmptyWrapped />;
         }
         return <MainScreenWrapped />;
       }}></Route>
-      <Route path={ROUTES.LOGIN} render={() => <SignInWrapped />}></Route>
-      <Route path={ROUTES.FAVORITES} render={() => <FavoritesWrapped />} />
+      <Route path={Routes.LOGIN} render={() => <SignInWrapped />}></Route>
+      <Route path={Routes.FAVORITES} render={() => <FavoritesWrapped />} />
 
-      {places.map((place, index) => <Route path={`${ROUTES.OFFER}/${place.id}`} render={() => <PlaceProperty
+      {places.map((place, index) => <Route path={`${Routes.OFFER}/${place.id}`} render={() => <PlaceProperty
         place={place}
       />} key={index}/>)}
     </Switch>

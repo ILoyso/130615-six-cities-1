@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import {Redirect} from 'react-router-dom';
 
-import {ROUTES} from '../../constants/routes';
+import {Routes} from '../../constants/routes';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 
@@ -17,7 +17,7 @@ const withPrivateRoute = (Component, anotherPath = undefined) => {
     }
 
     return !anotherPath && isAuthorizationRequired
-      ? <Redirect to={ROUTES.HOME} />
+      ? <Redirect to={Routes.HOME} />
       : <Component
         {...props}
       />;

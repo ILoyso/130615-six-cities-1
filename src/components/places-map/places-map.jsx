@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
-import {CITIES_DATA} from '../../constants/cities';
+import {CitiesData} from '../../constants/cities';
 
 const ICON = leaflet.icon({
   iconUrl: `img/pin.svg`,
@@ -83,7 +83,7 @@ class PlacesMap extends React.PureComponent {
       city,
       places
     } = this.props;
-    const cityCenter = CITIES_DATA[city];
+    const cityCenter = CitiesData[city];
     const {zoom} = SETTINGS;
 
     this._map.setView(cityCenter, zoom);
@@ -120,7 +120,7 @@ class PlacesMap extends React.PureComponent {
    * @private
    */
   _createMap(city) {
-    const cityCenter = CITIES_DATA[city];
+    const cityCenter = CitiesData[city];
 
     const {
       marker,
