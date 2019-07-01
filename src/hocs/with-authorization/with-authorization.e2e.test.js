@@ -18,8 +18,8 @@ describe(`withAuthorization`, () => {
       onLogIn={jest.fn()}
     />);
 
-    expect(wrapper.props().user.email).toEqual(`test@test.com`);
-    expect(wrapper.props().user.password).toEqual(`password`);
+    expect(wrapper.props().user.email).toEqual(``);
+    expect(wrapper.props().user.password).toEqual(``);
 
     wrapper.props().onChange({
       target: {
@@ -28,7 +28,7 @@ describe(`withAuthorization`, () => {
       }
     });
     expect(wrapper.props().user.email).toEqual(`email@email.ru`);
-    expect(wrapper.props().user.password).toEqual(`password`);
+    expect(wrapper.props().user.password).toEqual(``);
 
     wrapper.props().onChange({
       target: {
