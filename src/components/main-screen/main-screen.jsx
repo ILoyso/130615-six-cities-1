@@ -30,8 +30,10 @@ const MainScreen = (props) => {
     onChangeSorting,
     options,
     setActiveItem,
-    places
+    sortingPlaces
   } = props;
+
+  // console.log(sortingPlaces)
 
   return <div className="page page--gray page--main">
     <main className="page__main page__main--index">
@@ -46,7 +48,7 @@ const MainScreen = (props) => {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{places.length} {places.length > 1 ? `places` : `place`} to stay in {city}</b>
+            <b className="places__found">{sortingPlaces.length} {sortingPlaces.length > 1 ? `places` : `place`} to stay in {city}</b>
 
             <SortingWrapped
               activeOption={activeOption}
@@ -56,7 +58,7 @@ const MainScreen = (props) => {
 
             <PlacesList
               classHelper={`cities`}
-              places={places}
+              places={sortingPlaces}
               setActiveItem={setActiveItem}
             />
           </section>
@@ -65,7 +67,7 @@ const MainScreen = (props) => {
               activeItem={activeItem}
               city={city}
               className={`cities`}
-              places={places}
+              places={sortingPlaces}
             />
           </div>
         </div>
@@ -90,7 +92,7 @@ MainScreen.propTypes = {
     text: PropTypes.string.isRequired,
   })).isRequired,
   setActiveItem: PropTypes.func.isRequired,
-  places: PropTypes.arrayOf(PropTypes.shape({
+  sortingPlaces: PropTypes.arrayOf(PropTypes.shape({
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
     id: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,

@@ -38,7 +38,7 @@ describe(`MainScreen Component`, () => {
       onChangeSorting={jest.fn()}
       options={[optionMock]}
       setActiveItem={jest.fn()}
-      places={placeMock}
+      sortingPlaces={placeMock}
     />);
 
     expect(shallowToJson(mainScreen)).toMatchSnapshot();

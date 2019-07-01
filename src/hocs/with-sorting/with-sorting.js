@@ -22,6 +22,7 @@ const withSorting = (Component) => {
       this.state = {
         activeOption: null,
         options: SORTING_OPTIONS,
+        popularPlaces: Array.from(this.props.places),
         sortingPlaces: this.props.places
       };
 
@@ -44,11 +45,9 @@ const withSorting = (Component) => {
      * Updated sortingPLaces when places was loaded
      */
     componentDidUpdate() {
-      if (this.state.sortingPlaces.length === 0) {
-        this.setState(Object.assign({}, this.state, {
-          sortingPlaces: this.props.places
-        }));
-      }
+      this.setState(Object.assign({}, this.state, {
+        sortingPlaces: this.state.activeOption.id === `popular` ? this.props.places : this.state.sortingPlaces
+      }));
     }
 
     /**
@@ -72,7 +71,7 @@ const withSorting = (Component) => {
      * @return {Object}
      */
     _filterPlaces(id) {
-      const filteredPlaces = this.props.places;
+      let filteredPlaces = Array.from(this.props.places);
 
       switch (id) {
         case `low-to-high`: {
@@ -82,6 +81,11 @@ const withSorting = (Component) => {
 
         case `high-to-low`: {
           filteredPlaces.sort((place1, place2) => place2.price - place1.price);
+          break;
+        }
+
+        case `popular`: {
+          filteredPlaces = this.state.popularPlaces;
           break;
         }
 
