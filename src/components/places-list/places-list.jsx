@@ -38,7 +38,7 @@ const PlacesList = (props) => {
     }
 
     default: {
-      return ``;
+      return null;
     }
   }
 
